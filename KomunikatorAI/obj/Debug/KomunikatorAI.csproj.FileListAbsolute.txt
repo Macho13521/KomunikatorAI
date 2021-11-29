@@ -1,0 +1,10 @@
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\KomunikatorAI.exe.config
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\KomunikatorAI.exe
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\KomunikatorAI.pdb
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.AssemblyReference.cache
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.SuggestedBindingRedirects.cache
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.Properties.Resources.resources
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.GenerateResource.cache
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.CoreCompileInputs.cache
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.exe
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.pdb
