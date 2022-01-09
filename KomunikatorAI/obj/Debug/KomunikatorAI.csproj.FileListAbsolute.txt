@@ -8,3 +8,5 @@ C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.CoreCompileInputs.cache
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.exe
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.pdb
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.Logowanie.resources
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.Rejestracja.resources
