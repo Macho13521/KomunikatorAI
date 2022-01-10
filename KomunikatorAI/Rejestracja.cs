@@ -22,5 +22,14 @@ namespace KomunikatorAI
             new Logowanie().Show();
             this.Hide();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, object> uzytkownik = new Dictionary<string, object>() {
+                {"Login", nowylogin.Text},
+                {"Haslo", nowehaslo.Text}
+            };
+            Google.DodajRekord("Konta", uzytkownik);
+        }
     }
 }

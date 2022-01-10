@@ -27,5 +27,10 @@ namespace KomunikatorAI
             new Rejestracja().Show();
             this.Hide();
         }
+
+        private void Logowanie_Load(object sender, EventArgs e)
+        {
+            Google.Connect();
+        }
     }
 }
