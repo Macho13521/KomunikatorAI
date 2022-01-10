@@ -1,6 +1,7 @@
 ﻿using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KomunikatorAI
 {
@@ -17,17 +18,28 @@ namespace KomunikatorAI
             db = FirestoreDb.Create("komunikatorai");
         }
 
-        public static string DodajRekord(string Kolekcja, Dictionary<string, object> dane)
+        public static async Task NoweKontoAsync(string Kolekcja, string login, string haslo)
         {
+            Dictionary<string, object> uzytkownik = new Dictionary<string, object>() {
+                {"Login", login},
+                {"Haslo", haslo}
+            };
             try
             {
                 CollectionReference kolekcja = db.Collection(Kolekcja);
-                string ID = kolekcja.AddAsync(dane).Result.Id;
-                return ID;
+                Query kwerenda = kolekcja.WhereEqualTo("Login", login);
+
+                QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
+
+                if (zwrot.Documents.Count == 0)
+                {
+                    await kolekcja.AddAsync(uzytkownik);
+                }
+
             }
             catch
             {
-                return null;
+
             }
         }
     }
