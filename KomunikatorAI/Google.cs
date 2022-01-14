@@ -18,7 +18,7 @@ namespace KomunikatorAI
             db = FirestoreDb.Create("komunikatorai");
         }
 
-        public static async Task NoweKontoAsync(string Kolekcja, string login, string haslo)
+        public static async Task<bool> NoweKontoAsync(string Kolekcja, string login, string haslo)
         {
             Dictionary<string, object> uzytkownik = new Dictionary<string, object>() {
                 {"Login", login},
@@ -34,12 +34,17 @@ namespace KomunikatorAI
                 if (zwrot.Documents.Count == 0)
                 {
                     await kolekcja.AddAsync(uzytkownik);
+                    return true;
+                }
+                else
+                {
+                     return false;
                 }
 
             }
             catch
             {
-
+                return false;
             }
         }
     }
