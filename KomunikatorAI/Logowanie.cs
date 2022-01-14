@@ -38,8 +38,7 @@ namespace KomunikatorAI
             string IDKonta = await Google.Logowanie(wpisanylogin.Text, wpisanehaslo.Text);
             if (IDKonta.Length>10)
             {
-                MessageBox.Show("Zalogowano");
-                new Menu().Show();
+                new Menu(IDKonta).Show();
                 this.Hide();
             }
             else

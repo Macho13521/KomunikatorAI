@@ -12,9 +12,16 @@ namespace KomunikatorAI
 {
     public partial class Menu : Form
     {
-        public Menu()
+        public string IDKonta;
+        public Menu(string identyfikator)
         {
             InitializeComponent();
+            IDKonta = identyfikator;
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            przywitanie.Text = IDKonta;
         }
     }
 }
