@@ -19,7 +19,7 @@ namespace KomunikatorAI
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            AutoryzacjaAsync();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -31,6 +31,21 @@ namespace KomunikatorAI
         private void Logowanie_Load(object sender, EventArgs e)
         {
             Google.Connect();
+        }
+
+        private async Task AutoryzacjaAsync()
+        {
+            string IDKonta = await Google.Logowanie(wpisanylogin.Text, wpisanehaslo.Text);
+            if (IDKonta.Length>10)
+            {
+                MessageBox.Show("Zalogowano");
+                new Menu().Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne dane");
+            }
         }
     }
 }

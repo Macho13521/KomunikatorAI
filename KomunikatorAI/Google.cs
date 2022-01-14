@@ -18,7 +18,7 @@ namespace KomunikatorAI
             db = FirestoreDb.Create("komunikatorai");
         }
 
-        public static async Task<bool> NoweKontoAsync(string Kolekcja, string login, string haslo)
+        public static async Task<bool> NoweKontoAsync(string login, string haslo)
         {
             Dictionary<string, object> uzytkownik = new Dictionary<string, object>() {
                 {"Login", login},
@@ -26,7 +26,7 @@ namespace KomunikatorAI
             };
             try
             {
-                CollectionReference kolekcja = db.Collection(Kolekcja);
+                CollectionReference kolekcja = db.Collection("Konta");
                 Query kwerenda = kolekcja.WhereEqualTo("Login", login);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
@@ -45,6 +45,33 @@ namespace KomunikatorAI
             catch
             {
                 return false;
+            }
+        }
+
+
+        public static async Task<string> Logowanie(string Login, string Haslo)
+        {
+            try
+            {
+                CollectionReference kolekt = db.Collection("Konta");
+                Query kwerenda = kolekt
+                    .WhereEqualTo("Login", Login)
+                    .WhereEqualTo("Haslo", Haslo);
+
+                QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
+
+                if (zwrot.Documents.Count == 1)
+                {
+                    return zwrot.Documents[0].Id;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch
+            {
+                return "";
             }
         }
     }

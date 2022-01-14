@@ -30,7 +30,7 @@ namespace KomunikatorAI
 
         private async Task UtwórzKontoAsync()
         {
-            bool stan = await Google.NoweKontoAsync("Konta", nowylogin.Text, nowehaslo.Text);
+            bool stan = await Google.NoweKontoAsync(nowylogin.Text, nowehaslo.Text);
             if (stan)
             {
                 MessageBox.Show("Zarejestrowano");

@@ -78,3 +78,4 @@ C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\System.Runtime
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.CopyComplete
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\konekcik.json
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.Menu.resources
