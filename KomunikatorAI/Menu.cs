@@ -165,5 +165,10 @@ namespace KomunikatorAI
                 MessageBox.Show("Nie wybrałeś żadnego znajomego");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Rozmowa(IDZnajomych[listaznajomych.SelectedIndex]).Show();
+        }
     }
 }

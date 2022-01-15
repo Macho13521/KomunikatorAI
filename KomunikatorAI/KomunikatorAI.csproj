@@ -145,6 +145,12 @@
     <Compile Include="Rejestracja.Designer.cs">
       <DependentUpon>Rejestracja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rozmowa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rozmowa.Designer.cs">
+      <DependentUpon>Rozmowa.cs</DependentUpon>
+    </Compile>
     <Compile Include="szablony.cs" />
     <EmbeddedResource Include="Logowanie.resx">
       <DependentUpon>Logowanie.cs</DependentUpon>
@@ -167,6 +173,9 @@
     <Content Include="konekcik.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Rozmowa.resx">
+      <DependentUpon>Rozmowa.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
