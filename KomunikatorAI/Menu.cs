@@ -18,6 +18,8 @@ namespace KomunikatorAI
 
         User użytkownik;
 
+        List<string> IDZaproszeń = new List<string>();
+
         public Menu(string identyfikator)
         {
             InitializeComponent();
@@ -59,6 +61,8 @@ namespace KomunikatorAI
 
         private async Task WstępneZaproszeniaAsync()
         {
+            zaproszeniaznajomych.Items.Clear();
+
             QuerySnapshot dane = await Google.OczekująceZaproszenia(użytkownik.Login);
 
             foreach (DocumentSnapshot documentSnapshot in dane.Documents)
@@ -66,8 +70,24 @@ namespace KomunikatorAI
                 Console.WriteLine("Document data for {0} document:", documentSnapshot.Id);
                 Dictionary<string, object> zaproszenia = documentSnapshot.ToDictionary();
 
+                IDZaproszeń.Add(documentSnapshot.Id);
                 zaproszeniaznajomych.Items.Add(zaproszenia["Nadawca"]);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AkceptowanieZaproszeniaAsync();
+        }
+
+        private async Task AkceptowanieZaproszeniaAsync()
+        {
+            Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
+                {"Zaakceptowane", true}
+            };
+
+            await Google.AktualizacjaRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex], zaproszenie);
+            WstępneZaproszeniaAsync();
         }
     }
 }

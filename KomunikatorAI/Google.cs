@@ -164,6 +164,10 @@ namespace KomunikatorAI
             }
         }
 
+        internal static void AktualizacjaRekordu(string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
 
         public static async Task<DocumentSnapshot> PobierzRekord(string Kolekcja, string ID)
         {
@@ -197,5 +201,18 @@ namespace KomunikatorAI
             };
         }
 
+        public static async Task AktualizacjaRekordu(string Kolekcja, string ID, Dictionary<string, object> dane)
+        {
+            try
+            {
+                DocumentReference warunki = db.Collection(Kolekcja).Document(ID);
+                DocumentSnapshot Sprawdzenie = await warunki.GetSnapshotAsync();
+                await warunki.UpdateAsync(dane);
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
