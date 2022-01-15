@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static KomunikatorAI.szablony;
+using System.Threading;
 
 namespace KomunikatorAI
 {
@@ -19,6 +20,7 @@ namespace KomunikatorAI
         User użytkownik;
 
         List<string> IDZaproszeń = new List<string>();
+        List<string> IDZnajomych = new List<string>();
 
         public Menu(string identyfikator)
         {
@@ -44,7 +46,7 @@ namespace KomunikatorAI
             {
                 użytkownik = dane.ConvertTo<User>();
                 przywitanie.Text = "Witaj "+użytkownik.Login;
-                WstępneZaproszeniaAsync();
+                Odświeżenie();
             }
             else
             {
@@ -64,11 +66,10 @@ namespace KomunikatorAI
             zaproszeniaznajomych.Items.Clear();
             IDZaproszeń.Clear();
 
-            QuerySnapshot dane = await Google.OczekująceZaproszenia(użytkownik.Login);
+            QuerySnapshot dane = await Google.Znajomi(użytkownik.Login, false);
 
             foreach (DocumentSnapshot documentSnapshot in dane.Documents)
             {
-                Console.WriteLine("Document data for {0} document:", documentSnapshot.Id);
                 Dictionary<string, object> zaproszenia = documentSnapshot.ToDictionary();
 
                 IDZaproszeń.Add(documentSnapshot.Id);
@@ -88,13 +89,58 @@ namespace KomunikatorAI
             };
 
             await Google.AktualizacjaRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex], zaproszenie);
-            WstępneZaproszeniaAsync();
+            Odświeżenie();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            OdrzucanieZaproszeniaAsync();
+        }
+
+        private void OdrzucanieZaproszeniaAsync()
+        {
             Google.UsuwanieRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex]);
+
+            Thread.Sleep(1500);
+
+            Odświeżenie();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Odświeżenie();
+        }
+
+        private void Odświeżenie()
+        {
             WstępneZaproszeniaAsync();
+            ListaZnajomychAsync();
+        }
+
+        private async Task ListaZnajomychAsync()
+        {
+            listaznajomych.Items.Clear();
+            IDZnajomych.Clear();
+
+            QuerySnapshot dane = await Google.Znajomi(użytkownik.Login, true);
+
+            foreach (DocumentSnapshot documentSnapshot in dane.Documents)
+            {
+                Dictionary<string, object> zaproszenia = documentSnapshot.ToDictionary();
+
+                IDZnajomych.Add(documentSnapshot.Id);
+                listaznajomych.Items.Add(zaproszenia["Nadawca"]);
+            }
+
+            dane = await Google.Znajomi(użytkownik.Login, true, false);
+
+            foreach (DocumentSnapshot documentSnapshot in dane.Documents)
+            {
+                Dictionary<string, object> zaproszenia = documentSnapshot.ToDictionary();
+
+                IDZnajomych.Add(documentSnapshot.Id);
+                listaznajomych.Items.Add(zaproszenia["Odbiorca"]);
+            }
         }
     }
 }

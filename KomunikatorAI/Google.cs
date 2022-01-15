@@ -108,8 +108,7 @@ namespace KomunikatorAI
                 CollectionReference kolekt = db.Collection("Relacje");
                 Query kwerenda = kolekt
                     .WhereEqualTo("Nadawca", Nadawca)
-                    .WhereEqualTo("Odbiorca", Odbiorca)
-                    .WhereEqualTo("Zaakceptowane", false);
+                    .WhereEqualTo("Odbiorca", Odbiorca);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 
@@ -128,8 +127,7 @@ namespace KomunikatorAI
                 CollectionReference kolekt = db.Collection("Relacje");
                 Query kwerenda = kolekt
                     .WhereEqualTo("Nadawca", Odbiorca)
-                    .WhereEqualTo("Odbiorca", Nadawca)
-                    .WhereEqualTo("Zaakceptowane", false);
+                    .WhereEqualTo("Odbiorca", Nadawca);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 
@@ -182,21 +180,41 @@ namespace KomunikatorAI
             }
         }
 
-        public static async Task<QuerySnapshot> OczekująceZaproszenia(string Login)
+        public static async Task<QuerySnapshot> Znajomi(string Login, bool status, bool czytoja=true)
         {
-            try
+            if (czytoja)
             {
-                Query zapytanie = db.Collection("Relacje")
-                .WhereEqualTo("Odbiorca", Login)
-                .WhereEqualTo("Zaakceptowane", false);
+                try
+                {
+                    Query zapytanie = db.Collection("Relacje")
+                    .WhereEqualTo("Odbiorca", Login)
+                    .WhereEqualTo("Zaakceptowane", status);
 
-                QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
-                return dane;
+                    QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+                    return dane;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                };
             }
-            catch (Exception ex) 
+            else
             {
-                return null;
-            };
+                try
+                {
+                    Query zapytanie = db.Collection("Relacje")
+                    .WhereEqualTo("Nadawca", Login)
+                    .WhereEqualTo("Zaakceptowane", status);
+
+                    QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+                    return dane;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                };
+            }
+
         }
 
         public static async Task AktualizacjaRekordu(string Kolekcja, string ID, Dictionary<string, object> dane)
@@ -222,7 +240,6 @@ namespace KomunikatorAI
             }
             catch
             {
-
             }
         }
     }
