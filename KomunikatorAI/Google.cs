@@ -74,5 +74,109 @@ namespace KomunikatorAI
                 return "";
             }
         }
+
+        public static async Task<string> WyślijZaproszenieAsync(string Nadawca, string Odbiorca)
+        {
+            int warunki = 0;
+            Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
+                {"Aktualne", true},
+                {"Nadawca", Nadawca},
+                {"Odbiorca", Odbiorca},
+                {"Zaakceptowane", false}
+            };
+
+            try
+            {
+                CollectionReference kolekt = db.Collection("Konta");
+                Query kwerenda = kolekt
+                    .WhereEqualTo("Login", Odbiorca);
+
+                QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
+
+                if (zwrot.Documents.Count == 1)
+                {
+                    warunki++;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+
+            try
+            {
+                CollectionReference kolekt = db.Collection("Relacje");
+                Query kwerenda = kolekt
+                    .WhereEqualTo("Nadawca", Nadawca)
+                    .WhereEqualTo("Odbiorca", Odbiorca)
+                    .WhereEqualTo("Aktualne", true);
+
+                QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
+
+                if (zwrot.Documents.Count == 0)
+                {
+                    warunki++;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+
+            try
+            {
+                CollectionReference kolekt = db.Collection("Relacje");
+                Query kwerenda = kolekt
+                    .WhereEqualTo("Nadawca", Odbiorca)
+                    .WhereEqualTo("Odbiorca", Nadawca)
+                    .WhereEqualTo("Aktualne", true);
+
+                QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
+
+                if (zwrot.Documents.Count == 0)
+                {
+                    warunki++;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+
+
+            if (warunki == 3)
+            {
+                try
+                {
+                    CollectionReference kolekcja = db.Collection("Relacje");
+                    await kolekcja.AddAsync(zaproszenie);
+                }
+                catch
+                {
+                    return "Błąd Utworzenia Zaproszenia";
+                }
+                return "Wysłano zaproszenie";
+            }
+            else
+            {
+                return "Nie ma takiego Użytkownika lub już zostało wysłane zaproszenie";
+            }
+        }
+
+
+        public static async Task<DocumentSnapshot> PobierzRekord(string Kolekcja, string ID)
+        {
+            try
+            {
+                DocumentReference warunki = db.Collection(Kolekcja).Document(ID);
+                DocumentSnapshot zapytanie = await warunki.GetSnapshotAsync();
+                return zapytanie;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }
