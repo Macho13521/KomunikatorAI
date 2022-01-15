@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static KomunikatorAI.szablony;
 
 namespace KomunikatorAI
 {
@@ -176,6 +177,24 @@ namespace KomunikatorAI
             {
                 return null;
             }
+        }
+
+        public static async Task<QuerySnapshot> OczekująceZaproszenia(string Login)
+        {
+            try
+            {
+                Query zapytanie = db.Collection("Relacje")
+                .WhereEqualTo("Aktualne", true)
+                .WhereEqualTo("Odbiorca", Login)
+                .WhereEqualTo("Zaakceptowane", false);
+
+                QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+                return dane;
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            };
         }
 
     }

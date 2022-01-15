@@ -42,6 +42,7 @@ namespace KomunikatorAI
             {
                 użytkownik = dane.ConvertTo<User>();
                 przywitanie.Text = "Witaj "+użytkownik.Login;
+                WstępneZaproszeniaAsync();
             }
             else
             {
@@ -54,6 +55,19 @@ namespace KomunikatorAI
         {
             string komunikat = await Google.WyślijZaproszenieAsync(użytkownik.Login, nowyznajomy.Text);
             MessageBox.Show(komunikat);
+        }
+
+        private async Task WstępneZaproszeniaAsync()
+        {
+            QuerySnapshot dane = await Google.OczekująceZaproszenia(użytkownik.Login);
+
+            foreach (DocumentSnapshot documentSnapshot in dane.Documents)
+            {
+                Console.WriteLine("Document data for {0} document:", documentSnapshot.Id);
+                Dictionary<string, object> zaproszenia = documentSnapshot.ToDictionary();
+
+                zaproszeniaznajomych.Items.Add(zaproszenia["Nadawca"]);
+            }
         }
     }
 }
