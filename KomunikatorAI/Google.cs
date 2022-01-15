@@ -80,7 +80,6 @@ namespace KomunikatorAI
         {
             int warunki = 0;
             Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
-                {"Aktualne", true},
                 {"Nadawca", Nadawca},
                 {"Odbiorca", Odbiorca},
                 {"Zaakceptowane", false}
@@ -110,7 +109,7 @@ namespace KomunikatorAI
                 Query kwerenda = kolekt
                     .WhereEqualTo("Nadawca", Nadawca)
                     .WhereEqualTo("Odbiorca", Odbiorca)
-                    .WhereEqualTo("Aktualne", true);
+                    .WhereEqualTo("Zaakceptowane", false);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 
@@ -130,7 +129,7 @@ namespace KomunikatorAI
                 Query kwerenda = kolekt
                     .WhereEqualTo("Nadawca", Odbiorca)
                     .WhereEqualTo("Odbiorca", Nadawca)
-                    .WhereEqualTo("Aktualne", true);
+                    .WhereEqualTo("Zaakceptowane", false);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 
@@ -188,7 +187,6 @@ namespace KomunikatorAI
             try
             {
                 Query zapytanie = db.Collection("Relacje")
-                .WhereEqualTo("Aktualne", true)
                 .WhereEqualTo("Odbiorca", Login)
                 .WhereEqualTo("Zaakceptowane", false);
 
@@ -208,6 +206,19 @@ namespace KomunikatorAI
                 DocumentReference warunki = db.Collection(Kolekcja).Document(ID);
                 DocumentSnapshot Sprawdzenie = await warunki.GetSnapshotAsync();
                 await warunki.UpdateAsync(dane);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public static void UsuwanieRekordu(string Kolekcja, string ID)
+        {
+            try
+            {
+                DocumentReference warunki = db.Collection(Kolekcja).Document(ID);
+                warunki.DeleteAsync();
             }
             catch
             {

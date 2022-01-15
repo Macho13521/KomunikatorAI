@@ -62,6 +62,7 @@ namespace KomunikatorAI
         private async Task WstępneZaproszeniaAsync()
         {
             zaproszeniaznajomych.Items.Clear();
+            IDZaproszeń.Clear();
 
             QuerySnapshot dane = await Google.OczekująceZaproszenia(użytkownik.Login);
 
@@ -87,6 +88,12 @@ namespace KomunikatorAI
             };
 
             await Google.AktualizacjaRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex], zaproszenie);
+            WstępneZaproszeniaAsync();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Google.UsuwanieRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex]);
             WstępneZaproszeniaAsync();
         }
     }
