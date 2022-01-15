@@ -99,11 +99,18 @@ namespace KomunikatorAI
 
         private void OdrzucanieZaproszeniaAsync()
         {
-            Google.UsuwanieRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex]);
+            if (zaproszeniaznajomych.SelectedIndex >= 0)
+            {
+                Google.UsuwanieRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex]);
 
-            Thread.Sleep(1500);
+                Thread.Sleep(1000);
 
-            Odświeżenie();
+                Odświeżenie();
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrałeś żadnego zaproszenia");
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -140,6 +147,22 @@ namespace KomunikatorAI
 
                 IDZnajomych.Add(documentSnapshot.Id);
                 listaznajomych.Items.Add(zaproszenia["Odbiorca"]);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listaznajomych.SelectedIndex >=0)
+            {
+                Google.UsuwanieRekordu("Relacje", IDZnajomych[listaznajomych.SelectedIndex]);
+
+                Thread.Sleep(1000);
+
+                Odświeżenie();
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrałeś żadnego znajomego");
             }
         }
     }
