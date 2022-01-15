@@ -23,5 +23,10 @@ namespace KomunikatorAI
         {
             przywitanie.Text = IDKonta;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
