@@ -22,9 +22,11 @@ namespace KomunikatorAI
         List<string> IDZaproszeń = new List<string>();
         List<string> IDZnajomych = new List<string>();
 
+
         public Menu(string identyfikator)
         {
             InitializeComponent();
+            this.FormClosed += new FormClosedEventHandler(Logowanie.zamykanie);
             IDKonta = identyfikator;
         }
 
@@ -175,6 +177,10 @@ namespace KomunikatorAI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if(Rozmowa.nasłuchiwacz!=null)
+            {
+                Rozmowa.nasłuchiwacz.StopAsync();
+            }
             RozmowaAsync();
         }
 
@@ -184,9 +190,11 @@ namespace KomunikatorAI
             {
                 string IDRelacji = IDZnajomych[listaznajomych.SelectedIndex];
 
+                
+
                 string IDRozmowy = await Google.OtwieranieRozmowyAsync(IDRelacji);
 
-                new Rozmowa(IDRozmowy, użytkownik.Login).Show();
+                new Rozmowa(IDRozmowy, użytkownik.Login, listaznajomych.SelectedItem.ToString()).Show();
             }
             else
             {

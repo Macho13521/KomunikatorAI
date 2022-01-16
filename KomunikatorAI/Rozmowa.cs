@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using static KomunikatorAI.Menu;
+
 namespace KomunikatorAI
 {
     public partial class Rozmowa : Form
@@ -16,17 +18,23 @@ namespace KomunikatorAI
         string IDRozmowy;
         string UserLogin;
 
-        public Rozmowa(string ID, string user)
+        string odbiorca;
+
+        public static FirestoreChangeListener nasłuchiwacz;
+
+        public Rozmowa(string ID, string user, string rozmówca)
         {
             InitializeComponent();
             IDRozmowy = ID;
-            UserLogin = user;   
+            UserLogin = user;
+            odbiorca = rozmówca;
         }
 
         private void Rozmowa_Load(object sender, EventArgs e)
         {
-            info_rozmowa.Text = "ID Rozmowy: "+IDRozmowy+" Użytkownik: "+UserLogin;
+            info_rozmowa.Text = "Rozmowa z użytkownikiem: "+odbiorca;
             PobierzRozmowęAsync();
+            //powiadomienia(); Nie działa
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,6 +79,16 @@ namespace KomunikatorAI
                 oknorozmowy.Items.Add(linijka);
             }
             
+        }
+
+
+        private void powiadomienia()
+        {
+            Query warunki = Google.db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
+            nasłuchiwacz = warunki.Listen(snapshot =>
+            {
+                
+            });
         }
     }
 }

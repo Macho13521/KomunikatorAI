@@ -15,6 +15,7 @@ namespace KomunikatorAI
         public Logowanie()
         {
             InitializeComponent();
+            this.FormClosed += new FormClosedEventHandler(Logowanie.zamykanie);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +45,14 @@ namespace KomunikatorAI
             else
             {
                 MessageBox.Show("Niepoprawne dane");
+            }
+        }
+
+        public static void zamykanie(object sender, FormClosedEventArgs e)//wykrywanie sposobu wyłączenia aplikacji
+        {
+            if (e.CloseReason == CloseReason.UserClosing)//Jak używam this.close()
+            {
+                Application.Exit();
             }
         }
     }

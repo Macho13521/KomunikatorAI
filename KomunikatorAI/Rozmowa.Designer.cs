@@ -40,9 +40,10 @@
             // info_rozmowa
             // 
             this.info_rozmowa.AutoSize = true;
-            this.info_rozmowa.Location = new System.Drawing.Point(359, 9);
+            this.info_rozmowa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.info_rozmowa.Location = new System.Drawing.Point(248, 9);
             this.info_rozmowa.Name = "info_rozmowa";
-            this.info_rozmowa.Size = new System.Drawing.Size(35, 13);
+            this.info_rozmowa.Size = new System.Drawing.Size(57, 20);
             this.info_rozmowa.TabIndex = 0;
             this.info_rozmowa.Text = "label1";
             // 
