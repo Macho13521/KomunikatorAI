@@ -84,12 +84,19 @@ namespace KomunikatorAI
 
         private async Task AkceptowanieZaproszeniaAsync()
         {
-            Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
-                {"Zaakceptowane", true}
-            };
+            if (zaproszeniaznajomych.SelectedIndex >= 0)
+            {
+                Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
+                    {"Zaakceptowane", true}
+                };
 
-            await Google.AktualizacjaRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex], zaproszenie);
-            Odświeżenie();
+                await Google.AktualizacjaRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex], zaproszenie);
+                Odświeżenie();
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrałeś żadnego zaproszenia");
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -168,7 +175,23 @@ namespace KomunikatorAI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Rozmowa(IDZnajomych[listaznajomych.SelectedIndex]).Show();
+            RozmowaAsync();
+        }
+
+        private async Task RozmowaAsync()
+        {
+            if (listaznajomych.SelectedIndex >= 0)
+            {
+                string IDRelacji = IDZnajomych[listaznajomych.SelectedIndex];
+
+                string IDRozmowy = await Google.OtwieranieRozmowyAsync(IDRelacji);
+
+                new Rozmowa(IDRozmowy).Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrałeś żadnego znajomego");
+            }
         }
     }
 }

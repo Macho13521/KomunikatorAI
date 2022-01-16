@@ -82,7 +82,8 @@ namespace KomunikatorAI
             Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
                 {"Nadawca", Nadawca},
                 {"Odbiorca", Odbiorca},
-                {"Zaakceptowane", false}
+                {"Zaakceptowane", false},
+                {"Czat", "brak"}
             };
 
             try
@@ -240,6 +241,46 @@ namespace KomunikatorAI
             }
             catch
             {
+
+            }
+        }
+
+        public static async Task<string> OtwieranieRozmowyAsync(string IDRelacji)
+        {
+            try
+            {
+                DocumentReference warunki = db.Collection("Relacje").Document(IDRelacji);
+                DocumentSnapshot zapytanie = await warunki.GetSnapshotAsync();
+
+                Dictionary<string, object> Relacja = zapytanie.ToDictionary();
+
+                if (Relacja["Czat"].ToString()!="brak")
+                {
+                    return Relacja["Czat"].ToString();
+                }
+                else
+                {
+                    Dictionary<string, object> Rozmowa = new Dictionary<string, object>() {
+                        {"Pierwszy", Relacja["Nadawca"]},
+                        {"Drugi", Relacja["Odbiorca"]}
+                    };
+                    CollectionReference kolekcja = db.Collection("Rozmowy");
+                    string IDRozmowy = kolekcja.AddAsync(Rozmowa).Result.Id;
+
+                    DocumentReference dokument = db.Collection("Relacje").Document(IDRelacji);
+                    Dictionary<string, object> aktualizacja = new Dictionary<string, object>
+                    {
+                        {"Czat", IDRozmowy}
+                    };
+                    await dokument.UpdateAsync(aktualizacja);
+
+                    return IDRozmowy;
+                }
+
+            }
+            catch
+            {
+                return "brak";
             }
         }
     }
