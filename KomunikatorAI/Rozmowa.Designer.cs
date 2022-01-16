@@ -31,8 +31,8 @@
             this.info_rozmowa = new System.Windows.Forms.Label();
             this.nowawiadomosc = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.oknorozmowy = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
+            this.oknorozmowy = new System.Windows.Forms.ListView();
             this.Online = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lokalnie = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
@@ -64,21 +64,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // oknorozmowy
-            // 
-            this.oknorozmowy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Online,
-            this.Lokalnie});
-            this.oknorozmowy.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.oknorozmowy.Location = new System.Drawing.Point(106, 34);
-            this.oknorozmowy.MultiSelect = false;
-            this.oknorozmowy.Name = "oknorozmowy";
-            this.oknorozmowy.Scrollable = false;
-            this.oknorozmowy.Size = new System.Drawing.Size(551, 253);
-            this.oknorozmowy.TabIndex = 3;
-            this.oknorozmowy.UseCompatibleStateImageBehavior = false;
-            this.oknorozmowy.View = System.Windows.Forms.View.Details;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(692, 34);
@@ -88,6 +73,24 @@
             this.button2.Text = "Odśwież";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // oknorozmowy
+            // 
+            this.oknorozmowy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Online,
+            this.Lokalnie});
+            this.oknorozmowy.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.oknorozmowy.HideSelection = false;
+            this.oknorozmowy.Location = new System.Drawing.Point(106, 34);
+            this.oknorozmowy.MultiSelect = false;
+            this.oknorozmowy.Name = "oknorozmowy";
+            this.oknorozmowy.Scrollable = false;
+            this.oknorozmowy.ShowGroups = false;
+            this.oknorozmowy.Size = new System.Drawing.Size(551, 231);
+            this.oknorozmowy.TabIndex = 5;
+            this.oknorozmowy.TabStop = false;
+            this.oknorozmowy.UseCompatibleStateImageBehavior = false;
+            this.oknorozmowy.View = System.Windows.Forms.View.Details;
             // 
             // Online
             // 
@@ -105,8 +108,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.oknorozmowy);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.nowawiadomosc);
             this.Controls.Add(this.info_rozmowa);
@@ -123,8 +126,8 @@
         private System.Windows.Forms.Label info_rozmowa;
         private System.Windows.Forms.RichTextBox nowawiadomosc;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView oknorozmowy;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListView oknorozmowy;
         private System.Windows.Forms.ColumnHeader Online;
         private System.Windows.Forms.ColumnHeader Lokalnie;
     }

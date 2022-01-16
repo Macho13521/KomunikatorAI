@@ -26,6 +26,7 @@ namespace KomunikatorAI
         private void Rozmowa_Load(object sender, EventArgs e)
         {
             info_rozmowa.Text = "ID Rozmowy: "+IDRozmowy+" Użytkownik: "+UserLogin;
+            PobierzRozmowęAsync();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,30 +47,29 @@ namespace KomunikatorAI
 
         private async Task PobierzRozmowęAsync()
         {
-            oknorozmowy.Clear();
+            oknorozmowy.Items.Clear();
 
             QuerySnapshot dane = await Google.PobieranieRozmowyAsync(IDRozmowy);
 
-            ListViewItem linijka = new ListViewItem("Okno Rozmowy");
 
             foreach (DocumentSnapshot dokument in dane.Documents.Reverse())
             {
+                ListViewItem linijka = new ListViewItem("Czat");
                 Dictionary<string, object> wiadomość = dokument.ToDictionary();
 
                 if (wiadomość["Nadawca"].ToString() == UserLogin)
                 {
-                    MessageBox.Show("Prawda - "+wiadomość["Nadawca"].ToString()+" : "+wiadomość["Treść"].ToString());
-                    linijka.SubItems.Add("Nic");
+                    linijka.Text = "";
                     linijka.SubItems.Add(wiadomość["Treść"].ToString());
                 }
                 else
                 {
-                    MessageBox.Show("Fałsz - " + wiadomość["Nadawca"].ToString() + " : " + wiadomość["Treść"].ToString());
-                    linijka.SubItems.Add(wiadomość["Treść"].ToString());
-                    linijka.SubItems.Add("Nic");
+                    linijka.SubItems.Add("");
+                    linijka.Text = wiadomość["Treść"].ToString();
                 }
+                oknorozmowy.Items.Add(linijka);
             }
-            oknorozmowy.Items.Add(linijka);
+            
         }
     }
 }
