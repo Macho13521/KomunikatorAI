@@ -37,5 +37,14 @@ namespace KomunikatorAI
             await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
             nowawiadomosc.Text = "";
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ListViewItem linijka = new ListViewItem("heheszek");
+            linijka.SubItems.Add("Co tam?");
+            linijka.SubItems.Add("OK");
+
+            oknorozmowy.Items.Add(linijka); 
+        }
     }
 }
