@@ -26,5 +26,16 @@ namespace KomunikatorAI
         {
             info_rozmowa.Text = "ID Rozmowy: "+IDRozmowy+" Użytkownik: "+UserLogin;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Wiadomość();
+        }
+
+        private async void Wiadomość()
+        {
+            await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
+            nowawiadomosc.Text = "";
+        }
     }
 }

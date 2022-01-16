@@ -1,5 +1,6 @@
 ﻿using Google.Cloud.Firestore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static KomunikatorAI.szablony;
@@ -223,7 +224,6 @@ namespace KomunikatorAI
             try
             {
                 DocumentReference warunki = db.Collection(Kolekcja).Document(ID);
-                DocumentSnapshot Sprawdzenie = await warunki.GetSnapshotAsync();
                 await warunki.UpdateAsync(dane);
             }
             catch
@@ -282,6 +282,21 @@ namespace KomunikatorAI
             {
                 return "brak";
             }
+        }
+
+
+        public static async Task WyślijWiadomośćAsync(string IDRozmowy, string Nadawca, string treść)
+        {
+            CollectionReference kolekcja = db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
+
+
+            Dictionary<string, object> Rozmowa = new Dictionary<string, object>
+            {
+                {"Nadawca", Nadawca},
+                {"Treść", treść},
+                {"Czas", Timestamp.GetCurrentTimestamp().ToProto()}
+            };
+            await kolekcja.AddAsync(Rozmowa);
         }
     }
 }
