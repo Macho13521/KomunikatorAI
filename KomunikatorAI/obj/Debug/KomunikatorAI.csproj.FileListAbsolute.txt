@@ -80,3 +80,7 @@ C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\konekcik.json
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.Menu.resources
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.Rozmowa.resources
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\KomunikatorAI.exe.manifest
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Debug\KomunikatorAI.application
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.exe.manifest
+C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.application
