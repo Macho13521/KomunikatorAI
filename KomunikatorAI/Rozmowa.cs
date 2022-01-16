@@ -13,15 +13,18 @@ namespace KomunikatorAI
     public partial class Rozmowa : Form
     {
         string IDRozmowy;
-        public Rozmowa(string ID)
+        string UserLogin;
+
+        public Rozmowa(string ID, string user)
         {
             InitializeComponent();
             IDRozmowy = ID;
+            UserLogin = user;   
         }
 
         private void Rozmowa_Load(object sender, EventArgs e)
         {
-            info_rozmowa.Text = "ID Rozmowy: "+IDRozmowy;
+            info_rozmowa.Text = "ID Rozmowy: "+IDRozmowy+" Użytkownik: "+UserLogin;
         }
     }
 }

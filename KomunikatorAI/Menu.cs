@@ -186,7 +186,7 @@ namespace KomunikatorAI
 
                 string IDRozmowy = await Google.OtwieranieRozmowyAsync(IDRelacji);
 
-                new Rozmowa(IDRozmowy).Show();
+                new Rozmowa(IDRozmowy, użytkownik.Login).Show();
             }
             else
             {
