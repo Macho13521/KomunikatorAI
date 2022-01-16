@@ -38,6 +38,7 @@ namespace KomunikatorAI
         {
             await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
             nowawiadomosc.Text = "";
+            PobierzRozmowęAsync();
         }
 
         private void button2_Click(object sender, EventArgs e)
