@@ -298,5 +298,13 @@ namespace KomunikatorAI
             };
             await kolekcja.AddAsync(Rozmowa);
         }
+
+        public static async Task<QuerySnapshot> PobieranieRozmowyAsync(string IDRozmowy)
+        {
+            Query zapytanie = db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa").Limit(3).OrderByDescending("Czas");
+            QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+
+            return dane;
+        }
     }
 }

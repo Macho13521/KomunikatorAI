@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,10 +30,10 @@ namespace KomunikatorAI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Wiadomość();
+            WysyłanieWiadomości();
         }
 
-        private async void Wiadomość()
+        private async void WysyłanieWiadomości()
         {
             await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
             nowawiadomosc.Text = "";
@@ -40,11 +41,35 @@ namespace KomunikatorAI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ListViewItem linijka = new ListViewItem("heheszek");
-            linijka.SubItems.Add("Co tam?");
-            linijka.SubItems.Add("OK");
+            PobierzRozmowęAsync();
+        }
 
-            oknorozmowy.Items.Add(linijka); 
+        private async Task PobierzRozmowęAsync()
+        {
+            oknorozmowy.Clear();
+
+            QuerySnapshot dane = await Google.PobieranieRozmowyAsync(IDRozmowy);
+
+            ListViewItem linijka = new ListViewItem("Okno Rozmowy");
+
+            foreach (DocumentSnapshot dokument in dane.Documents.Reverse())
+            {
+                Dictionary<string, object> wiadomość = dokument.ToDictionary();
+
+                if (wiadomość["Nadawca"].ToString() == UserLogin)
+                {
+                    MessageBox.Show("Prawda - "+wiadomość["Nadawca"].ToString()+" : "+wiadomość["Treść"].ToString());
+                    linijka.SubItems.Add("Nic");
+                    linijka.SubItems.Add(wiadomość["Treść"].ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Fałsz - " + wiadomość["Nadawca"].ToString() + " : " + wiadomość["Treść"].ToString());
+                    linijka.SubItems.Add(wiadomość["Treść"].ToString());
+                    linijka.SubItems.Add("Nic");
+                }
+            }
+            oknorozmowy.Items.Add(linijka);
         }
     }
 }
