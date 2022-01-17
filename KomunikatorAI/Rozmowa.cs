@@ -1,15 +1,9 @@
 ﻿using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static KomunikatorAI.Menu;
 
 namespace KomunikatorAI
 {
@@ -45,7 +39,7 @@ namespace KomunikatorAI
         private async void WysyłanieWiadomości()
         {
             await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
-            AnalizaJęzykaAsync(nowawiadomosc.Text);
+            Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
             nowawiadomosc.Text = "";
             PobierzRozmowęAsync();
         }
@@ -82,36 +76,6 @@ namespace KomunikatorAI
             
         }
 
-        private async Task AnalizaJęzykaAsync(string wiadomość)
-        {
-            string[] słowa = wiadomość.Split(' ', '.', ',', '?', '!', '"', '*');
-
-            foreach (var słowo in słowa)
-            {
-                if(słowo!="")
-                {
-                    Query zapytanie = Google.db.Collection("Słownik").WhereEqualTo("Wyraz", słowo);
-                    QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
-
-                    if (dane.Documents.Count==1)
-                    {
-                        DocumentReference dokument = Google.db.Collection("Słownik").Document(dane.Documents.First().Id);
-                        await dokument.UpdateAsync("Popularność", FieldValue.Increment(1));
-                    }
-                    else
-                    {
-                        CollectionReference kolekcja = Google.db.Collection("Słownik");
-                        Dictionary<string, object> nowesłowo = new Dictionary<string, object>
-                        {
-                            {"Wyraz", słowo},
-                            {"Popularność", 1}
-                        };
-                        await kolekcja.AddAsync(nowesłowo);
-                    }
-                }
-            }
-        }
-
         private void powiadomienia()
         {
             Query warunki = Google.db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
@@ -120,5 +84,7 @@ namespace KomunikatorAI
                 
             });
         }
+
+    
     }
 }
