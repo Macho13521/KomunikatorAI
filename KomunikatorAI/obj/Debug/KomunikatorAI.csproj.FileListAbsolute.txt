@@ -168,4 +168,3 @@ X:\KomunikatorAI\KomunikatorAI\bin\Debug\System.Numerics.Vectors.xml
 X:\KomunikatorAI\KomunikatorAI\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 X:\KomunikatorAI\KomunikatorAI\bin\Debug\System.Threading.Tasks.Extensions.xml
 X:\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.application
-X:\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.CopyComplete

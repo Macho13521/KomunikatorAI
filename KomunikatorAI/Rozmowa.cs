@@ -28,7 +28,7 @@ namespace KomunikatorAI
         {
             info_rozmowa.Text = "Rozmowa z użytkownikiem: "+odbiorca;
             PobierzRozmowęAsync();
-            //powiadomienia(); Nie działa
+            powiadomienia(); //nie działa
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace KomunikatorAI
             Query warunki = Google.db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
             nasłuchiwacz = warunki.Listen(snapshot =>
             {
-                
+                PobierzRozmowęAsync();
             });
         }
 

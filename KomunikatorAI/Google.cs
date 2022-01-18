@@ -339,7 +339,7 @@ namespace KomunikatorAI
                     if (x+1< słowo.Count)
                     {
                         Query zapytanie2 = db.Collection("Słownik").Document(IDSłowa).Collection("Podpowiedzi").WhereEqualTo("Wyraz", słowo[x+1]);
-                        QuerySnapshot dane2 = await zapytanie.GetSnapshotAsync();
+                        QuerySnapshot dane2 = await zapytanie2.GetSnapshotAsync();
 
                         if (dane2.Documents.Count >= 1)
                         {
