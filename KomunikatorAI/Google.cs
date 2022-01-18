@@ -339,7 +339,7 @@ namespace KomunikatorAI
                     if (x+1< słowo.Count)
                     {
                         Query zapytanie2 = db.Collection("Słownik").Document(IDSłowa).Collection("Podpowiedzi").WhereEqualTo("Wyraz", słowo[x+1]);
-                        QuerySnapshot dane2 = await zapytanie.GetSnapshotAsync();
+                        QuerySnapshot dane2 = await zapytanie2.GetSnapshotAsync();
 
                         if (dane2.Documents.Count >= 1)
                         {
@@ -363,23 +363,23 @@ namespace KomunikatorAI
                 }
                 else
                 {
-                    Console.WriteLine("Dodawanie nowego słowa");
-                    int pierwsza = 0;
-                    if (x == 0)
+                    if (x + 1 < słowo.Count)
                     {
-                        pierwsza++;
-                    }
+                        Console.WriteLine("Dodawanie nowego słowa");
+                        int pierwsza = 0;
+                        if (x == 0)
+                        {
+                            pierwsza++;
+                        }
 
-                    CollectionReference kolekcja = db.Collection("Słownik");
-                    Dictionary<string, object> nowesłowo = new Dictionary<string, object>
+                        CollectionReference kolekcja = db.Collection("Słownik");
+                        Dictionary<string, object> nowesłowo = new Dictionary<string, object>
                         {
                             {"Wyraz", słowo[x]},
                             {"Popularność", pierwsza}
                         };
-                    string IDSłowa = kolekcja.AddAsync(nowesłowo).Result.Id;
+                        string IDSłowa = kolekcja.AddAsync(nowesłowo).Result.Id;
 
-                    if (x + 1 < słowo.Count)
-                    {
                         Console.WriteLine("Dodawanie nowej podpowiedzi");
                         CollectionReference kolekcja2 = db.Collection("Słownik").Document(IDSłowa).Collection("Podpowiedzi");
                         Dictionary<string, object> podpowiedź = new Dictionary<string, object>
