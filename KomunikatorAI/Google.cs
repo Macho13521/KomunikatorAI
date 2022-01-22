@@ -392,5 +392,30 @@ namespace KomunikatorAI
                 }
             }
         }
+
+
+        public static async Task<List<string>> SugestiaAsync(string wiadomość)
+        {
+            string[] słowa = wiadomość.Split(' ', '.', ',', '?', '!', '"', '*');
+            List<string> słowo = new List<string>();
+
+            List<string> Sugestie = new List<string>();
+
+            Dictionary<string, object> proponowane = new Dictionary<string, object>();
+
+            for (int x = 0; x < słowa.Length; x++)
+            {
+                if (słowa[x] != "" && słowa[x] != " " && słowa[x] != "." && słowa[x] != "," && słowa[x] != "!" && słowa[x] != "?")
+                {
+                    słowo.Add(słowa[x]);
+                }
+            }
+
+            if (wiadomość != "" && wiadomość != " ")
+            {
+                
+            }
+            return Sugestie;
+        }
     }
 }

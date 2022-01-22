@@ -27,8 +27,7 @@ namespace KomunikatorAI
         private void Rozmowa_Load(object sender, EventArgs e)
         {
             info_rozmowa.Text = "Rozmowa z użytkownikiem: "+odbiorca;
-            PobierzRozmowęAsync();
-            //powiadomienia(); Nie działa
+            powiadomienia();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,7 +40,6 @@ namespace KomunikatorAI
             await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
             Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
             nowawiadomosc.Text = "";
-            PobierzRozmowęAsync();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -51,10 +49,12 @@ namespace KomunikatorAI
 
         private async Task PobierzRozmowęAsync()
         {
-            oknorozmowy.Items.Clear();
+            if (oknorozmowy.InvokeRequired)
+            {
+                oknorozmowy.Invoke(new Action(() => { oknorozmowy.Items.Clear(); }));
+            }
 
             QuerySnapshot dane = await Google.PobieranieRozmowyAsync(IDRozmowy);
-
 
             foreach (DocumentSnapshot dokument in dane.Documents.Reverse())
             {
@@ -71,9 +71,11 @@ namespace KomunikatorAI
                     linijka.SubItems.Add("");
                     linijka.Text = wiadomość["Treść"].ToString();
                 }
-                oknorozmowy.Items.Add(linijka);
+                if (oknorozmowy.InvokeRequired)
+                {
+                    oknorozmowy.Invoke(new Action(() => { oknorozmowy.Items.Add(linijka); }));
+                }
             }
-            
         }
 
         private void powiadomienia()
@@ -81,10 +83,24 @@ namespace KomunikatorAI
             Query warunki = Google.db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
             nasłuchiwacz = warunki.Listen(snapshot =>
             {
-                
+                PobierzRozmowęAsync();
             });
         }
 
-    
+        private void nowawiadomosc_TextChanged(object sender, EventArgs e)
+        {
+            Podpowiedzi();
+        }
+
+        private void Podpowiedzi()
+        {
+            List<string> Sugestie = new List<string>();
+            Sugestie = Google.SugestiaAsync(nowawiadomosc.Text).Result;
+
+            for (int x=0; x<Sugestie.Count; x++)
+            {
+                sugestie.Items.Add(Sugestie[x]);
+            }
+        }
     }
 }

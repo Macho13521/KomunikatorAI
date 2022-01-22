@@ -35,6 +35,7 @@
             this.oknorozmowy = new System.Windows.Forms.ListView();
             this.Online = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lokalnie = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.sugestie = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // info_rozmowa
@@ -54,6 +55,7 @@
             this.nowawiadomosc.Size = new System.Drawing.Size(470, 50);
             this.nowawiadomosc.TabIndex = 1;
             this.nowawiadomosc.Text = "";
+            this.nowawiadomosc.TextChanged += new System.EventHandler(this.nowawiadomosc_TextChanged);
             // 
             // button1
             // 
@@ -104,11 +106,24 @@
             this.Lokalnie.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Lokalnie.Width = 274;
             // 
+            // sugestie
+            // 
+            this.sugestie.BackColor = System.Drawing.SystemColors.Menu;
+            this.sugestie.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.sugestie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sugestie.FormattingEnabled = true;
+            this.sugestie.ItemHeight = 20;
+            this.sugestie.Location = new System.Drawing.Point(317, 292);
+            this.sugestie.Name = "sugestie";
+            this.sugestie.Size = new System.Drawing.Size(156, 80);
+            this.sugestie.TabIndex = 9;
+            // 
             // Rozmowa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.sugestie);
             this.Controls.Add(this.oknorozmowy);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -131,5 +146,6 @@
         private System.Windows.Forms.ListView oknorozmowy;
         private System.Windows.Forms.ColumnHeader Online;
         private System.Windows.Forms.ColumnHeader Lokalnie;
+        private System.Windows.Forms.ListBox sugestie;
     }
 }
