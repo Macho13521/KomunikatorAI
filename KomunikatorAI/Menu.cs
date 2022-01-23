@@ -190,11 +190,7 @@ namespace KomunikatorAI
             {
                 string IDRelacji = IDZnajomych[listaznajomych.SelectedIndex];
 
-                
-
-                string IDRozmowy = await Google.OtwieranieRozmowyAsync(IDRelacji);
-
-                new Rozmowa(IDRozmowy, użytkownik.Login, listaznajomych.SelectedItem.ToString()).Show();
+                new Rozmowa(IDRelacji, użytkownik.Login, listaznajomych.SelectedItem.ToString()).Show();
             }
             else
             {

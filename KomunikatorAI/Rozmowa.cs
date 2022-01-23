@@ -9,9 +9,8 @@ namespace KomunikatorAI
 {
     public partial class Rozmowa : Form
     {
-        string IDRozmowy;
+        string IDRelacji;
         string UserLogin;
-
         string odbiorca;
 
         public static FirestoreChangeListener nasłuchiwacz;
@@ -19,7 +18,7 @@ namespace KomunikatorAI
         public Rozmowa(string ID, string user, string rozmówca)
         {
             InitializeComponent();
-            IDRozmowy = ID;
+            IDRelacji = ID;
             UserLogin = user;
             odbiorca = rozmówca;
         }
@@ -37,7 +36,7 @@ namespace KomunikatorAI
 
         private async void WysyłanieWiadomości()
         {
-            await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
+            await Google.WyślijWiadomośćAsync(IDRelacji, UserLogin, nowawiadomosc.Text);
             Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
             nowawiadomosc.Text = "";
         }
@@ -49,7 +48,7 @@ namespace KomunikatorAI
                 oknorozmowy.Invoke(new Action(() => { oknorozmowy.Items.Clear(); }));
             }
 
-            QuerySnapshot dane = await Google.PobieranieRozmowyAsync(IDRozmowy);
+            QuerySnapshot dane = await Google.PobieranieRozmowyAsync(IDRelacji);
 
             foreach (DocumentSnapshot dokument in dane.Documents.Reverse())
             {
@@ -75,7 +74,7 @@ namespace KomunikatorAI
 
         private void OdświeżanieCzatu()
         {
-            Query warunki = Google.db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
+            Query warunki = Google.db.Collection("Relacje").Document(IDRelacji).Collection("Rozmowa");
             nasłuchiwacz = warunki.Listen(snapshot =>
             {
                 PobierzRozmowęAsync();

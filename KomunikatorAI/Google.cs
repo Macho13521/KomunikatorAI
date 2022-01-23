@@ -82,8 +82,7 @@ namespace KomunikatorAI
             Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
                 {"Nadawca", Nadawca},
                 {"Odbiorca", Odbiorca},
-                {"Zaakceptowane", false},
-                {"Czat", "brak"}
+                {"Zaakceptowane", false}
             };
 
             try
@@ -244,49 +243,9 @@ namespace KomunikatorAI
             }
         }
 
-        public static async Task<string> OtwieranieRozmowyAsync(string IDRelacji)
+        public static async Task WyślijWiadomośćAsync(string IDRelacji, string Nadawca, string treść)
         {
-            try
-            {
-                DocumentReference warunki = db.Collection("Relacje").Document(IDRelacji);
-                DocumentSnapshot zapytanie = await warunki.GetSnapshotAsync();
-
-                Dictionary<string, object> Relacja = zapytanie.ToDictionary();
-
-                if (Relacja["Czat"].ToString()!="brak")
-                {
-                    return Relacja["Czat"].ToString();
-                }
-                else
-                {
-                    Dictionary<string, object> Rozmowa = new Dictionary<string, object>() {
-                        {"Pierwszy", Relacja["Nadawca"]},
-                        {"Drugi", Relacja["Odbiorca"]}
-                    };
-                    CollectionReference kolekcja = db.Collection("Rozmowy");
-                    string IDRozmowy = kolekcja.AddAsync(Rozmowa).Result.Id;
-
-                    DocumentReference dokument = db.Collection("Relacje").Document(IDRelacji);
-                    Dictionary<string, object> aktualizacja = new Dictionary<string, object>
-                    {
-                        {"Czat", IDRozmowy}
-                    };
-                    await dokument.UpdateAsync(aktualizacja);
-
-                    return IDRozmowy;
-                }
-
-            }
-            catch
-            {
-                return "brak";
-            }
-        }
-
-
-        public static async Task WyślijWiadomośćAsync(string IDRozmowy, string Nadawca, string treść)
-        {
-            CollectionReference kolekcja = db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
+            CollectionReference kolekcja = db.Collection("Relacje").Document(IDRelacji).Collection("Rozmowa");
 
 
             Dictionary<string, object> Rozmowa = new Dictionary<string, object>
@@ -298,9 +257,9 @@ namespace KomunikatorAI
             await kolekcja.AddAsync(Rozmowa);
         }
 
-        public static async Task<QuerySnapshot> PobieranieRozmowyAsync(string IDRozmowy)
+        public static async Task<QuerySnapshot> PobieranieRozmowyAsync(string IDRelacji)
         {
-            Query zapytanie = db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa").Limit(10).OrderByDescending("Czas");
+            Query zapytanie = db.Collection("Relacje").Document(IDRelacji).Collection("Rozmowa").Limit(10).OrderByDescending("Czas");
             QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
 
             return dane;
