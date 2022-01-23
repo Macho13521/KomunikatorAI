@@ -31,7 +31,6 @@
             this.info_rozmowa = new System.Windows.Forms.Label();
             this.nowawiadomosc = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.oknorozmowy = new System.Windows.Forms.ListView();
             this.Online = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lokalnie = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,16 +65,6 @@
             this.button1.Text = "Wyślij";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(692, 34);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Odśwież";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // oknorozmowy
             // 
@@ -125,7 +114,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.sugestie);
             this.Controls.Add(this.oknorozmowy);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.nowawiadomosc);
             this.Controls.Add(this.info_rozmowa);
@@ -142,7 +130,6 @@
         private System.Windows.Forms.Label info_rozmowa;
         private System.Windows.Forms.RichTextBox nowawiadomosc;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListView oknorozmowy;
         private System.Windows.Forms.ColumnHeader Online;
         private System.Windows.Forms.ColumnHeader Lokalnie;

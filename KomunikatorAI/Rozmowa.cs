@@ -27,7 +27,7 @@ namespace KomunikatorAI
         private void Rozmowa_Load(object sender, EventArgs e)
         {
             info_rozmowa.Text = "Rozmowa z użytkownikiem: "+odbiorca;
-            powiadomienia();
+            OdświeżanieCzatu();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,11 +40,6 @@ namespace KomunikatorAI
             await Google.WyślijWiadomośćAsync(IDRozmowy, UserLogin, nowawiadomosc.Text);
             Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
             nowawiadomosc.Text = "";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            PobierzRozmowęAsync();
         }
 
         private async Task PobierzRozmowęAsync()
@@ -78,7 +73,7 @@ namespace KomunikatorAI
             }
         }
 
-        private void powiadomienia()
+        private void OdświeżanieCzatu()
         {
             Query warunki = Google.db.Collection("Rozmowy").Document(IDRozmowy).Collection("Rozmowa");
             nasłuchiwacz = warunki.Listen(snapshot =>
