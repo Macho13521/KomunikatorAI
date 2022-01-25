@@ -83,4 +83,3 @@ C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.CopyComplete
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.exe
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.pdb
-C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Debug\KomunikatorAI.csproj.AssemblyReference.cache

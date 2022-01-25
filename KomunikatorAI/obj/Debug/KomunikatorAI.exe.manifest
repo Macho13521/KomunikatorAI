@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KomunikatorAI.exe" size="48608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KomunikatorAI.exe" size="50656">
       <assemblyIdentity name="KomunikatorAI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QDBr4H1wyP6nlCGP0c16C84PrY7C8HRPS8B8z+nr22k=</dsig:DigestValue>
+        <dsig:DigestValue>jCNOcvgUDozf8tT86MkcV7iIkOUF60MN9QU5qjcUugY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -378,15 +378,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>YouLBeL0z82tkXdpavsCZ06Zzr9OWVcmC/TDPkxQd3g=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="konekcik.json" size="2340">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Twsi6VJeGPjnHAfaqsKY8Eqbz4p8inX8cH0PgOAsteU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="libgrpc_csharp_ext.x64.dylib" size="8371628">

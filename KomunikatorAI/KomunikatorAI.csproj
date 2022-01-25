@@ -198,9 +198,9 @@
     <EmbeddedResource Include="Rejestracja.resx">
       <DependentUpon>Rejestracja.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="konekcik.json">
+    <EmbeddedResource Include="konekcik.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <EmbeddedResource Include="Rozmowa.resx">
       <DependentUpon>Rozmowa.cs</DependentUpon>
     </EmbeddedResource>

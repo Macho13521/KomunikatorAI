@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KomunikatorAI", "KomunikatorAI\KomunikatorAI.csproj", "{C5F16F7C-CCB0-4BAE-8B5A-66FA0364CD66}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "KomunikatorAICore", "KomunikatorAICore\KomunikatorAICore.vdproj", "{52CD63B7-9586-4F20-A42C-2C6260311214}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{C5F16F7C-CCB0-4BAE-8B5A-66FA0364CD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5F16F7C-CCB0-4BAE-8B5A-66FA0364CD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5F16F7C-CCB0-4BAE-8B5A-66FA0364CD66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52CD63B7-9586-4F20-A42C-2C6260311214}.Debug|Any CPU.ActiveCfg = Debug
+		{52CD63B7-9586-4F20-A42C-2C6260311214}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
