@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KomunikatorAI
 {
-    class szablony
+    public class szablony
     {
         [FirestoreData]
         public class User
@@ -16,6 +16,8 @@ namespace KomunikatorAI
             public string Login { get; set; }
             [FirestoreProperty]
             public string Haslo { get; set; }
+            [FirestoreProperty]
+            public bool Nauczyciel { get; set; }
         }
     }
 }

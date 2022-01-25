@@ -17,7 +17,7 @@ namespace KomunikatorAI
     {
         public string IDKonta;
 
-        User użytkownik;
+        public static User użytkownik;
 
         List<string> IDZaproszeń = new List<string>();
         List<string> IDZnajomych = new List<string>();

@@ -23,7 +23,8 @@ namespace KomunikatorAI
         {
             Dictionary<string, object> uzytkownik = new Dictionary<string, object>() {
                 {"Login", login},
-                {"Haslo", haslo}
+                {"Haslo", haslo},
+                {"Nauczyciel", false}
             };
             try
             {

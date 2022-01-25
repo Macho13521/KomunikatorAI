@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KomunikatorAI.Menu;
 
 namespace KomunikatorAI
 {
@@ -37,7 +38,10 @@ namespace KomunikatorAI
         private async void WysyłanieWiadomości()
         {
             await Google.WyślijWiadomośćAsync(IDRelacji, UserLogin, nowawiadomosc.Text);
-            Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
+            if (użytkownik.Nauczyciel)
+            {
+                Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
+            }
             nowawiadomosc.Text = "";
         }
 
@@ -106,11 +110,6 @@ namespace KomunikatorAI
                 Console.WriteLine("Nie ma podpowiedzi do tego słowa");
             }
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            PodpowiedziAsync();
         }
     }
 }
