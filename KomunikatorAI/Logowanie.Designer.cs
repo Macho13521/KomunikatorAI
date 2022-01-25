@@ -60,6 +60,7 @@
             this.wpisanehaslo.Name = "wpisanehaslo";
             this.wpisanehaslo.Size = new System.Drawing.Size(100, 20);
             this.wpisanehaslo.TabIndex = 2;
+            this.wpisanehaslo.UseSystemPasswordChar = true;
             // 
             // label1
             // 

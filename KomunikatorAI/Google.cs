@@ -24,7 +24,9 @@ namespace KomunikatorAI
             Dictionary<string, object> uzytkownik = new Dictionary<string, object>() {
                 {"Login", login},
                 {"Haslo", haslo},
+                {"Aktywowane", false},
                 {"Nauczyciel", false}
+  
             };
             try
             {
@@ -58,7 +60,8 @@ namespace KomunikatorAI
                 CollectionReference kolekt = db.Collection("Konta");
                 Query kwerenda = kolekt
                     .WhereEqualTo("Login", Login)
-                    .WhereEqualTo("Haslo", Haslo);
+                    .WhereEqualTo("Haslo", Haslo)
+                    .WhereEqualTo("Aktywowane", true);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 

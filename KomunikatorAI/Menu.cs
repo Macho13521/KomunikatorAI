@@ -59,8 +59,16 @@ namespace KomunikatorAI
 
         private async Task WyślijZaproszenieAsync()
         {
-            string komunikat = await Google.WyślijZaproszenieAsync(użytkownik.Login, nowyznajomy.Text);
-            MessageBox.Show(komunikat);
+            if (użytkownik.Login!= nowyznajomy.Text)
+            {
+                string komunikat = await Google.WyślijZaproszenieAsync(użytkownik.Login, nowyznajomy.Text);
+                MessageBox.Show(komunikat);
+            }
+            else
+            {
+                MessageBox.Show("Nie możesz dodać sam siebie");
+            }
+            
         }
 
         private async Task WstępneZaproszeniaAsync()

@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KomunikatorAI.exe" size="48096">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KomunikatorAI.exe" size="48608">
       <assemblyIdentity name="KomunikatorAI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UPrkVdvV3NVfeOcskBzstA9CPEBk/J876E5yNc9tDAs=</dsig:DigestValue>
+        <dsig:DigestValue>QDBr4H1wyP6nlCGP0c16C84PrY7C8HRPS8B8z+nr22k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

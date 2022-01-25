@@ -67,6 +67,7 @@
             this.nowehaslo.Name = "nowehaslo";
             this.nowehaslo.Size = new System.Drawing.Size(100, 20);
             this.nowehaslo.TabIndex = 2;
+            this.nowehaslo.UseSystemPasswordChar = true;
             // 
             // button1
             // 
