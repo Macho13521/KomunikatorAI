@@ -83,18 +83,34 @@ namespace KomunikatorAI
 
         private void nowawiadomosc_TextChanged(object sender, EventArgs e)
         {
-            Podpowiedzi();
+            //Podpowiedzi();
         }
 
-        private void Podpowiedzi()
+        private async Task PodpowiedziAsync()
         {
-            List<string> Sugestie = new List<string>();
-            Sugestie = Google.SugestiaAsync(nowawiadomosc.Text).Result;
+            sugestie.Items.Clear(); 
 
-            for (int x=0; x<Sugestie.Count; x++)
+            QuerySnapshot dane = await Google.SugestiaAsync(nowawiadomosc.Text);
+
+            if (dane.Count>0)
             {
-                sugestie.Items.Add(Sugestie[x]);
+                foreach (DocumentSnapshot documentSnapshot in dane.Documents)
+                {
+                    Dictionary<string, object> sugestia = documentSnapshot.ToDictionary();
+
+                    sugestie.Items.Add(sugestia["Wyraz"].ToString());
+                }
             }
+            else
+            {
+                Console.WriteLine("Nie ma podpowiedzi do tego słowa");
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PodpowiedziAsync();
         }
     }
 }

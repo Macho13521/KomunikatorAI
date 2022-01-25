@@ -353,14 +353,10 @@ namespace KomunikatorAI
         }
 
 
-        public static async Task<List<string>> SugestiaAsync(string wiadomość)
+        public static async Task<QuerySnapshot> SugestiaAsync(string wiadomość)
         {
             string[] słowa = wiadomość.Split(' ', '.', ',', '?', '!', '"', '*');
             List<string> słowo = new List<string>();
-
-            List<string> Sugestie = new List<string>();
-
-            Dictionary<string, object> proponowane = new Dictionary<string, object>();
 
             for (int x = 0; x < słowa.Length; x++)
             {
@@ -370,11 +366,34 @@ namespace KomunikatorAI
                 }
             }
 
-            if (wiadomość != "" && wiadomość != " ")
+            if (słowo.Count > 1)
             {
-                
+                Console.WriteLine("Pobieranie podpowiedzi do słowa: "+ słowo[słowo.Count - 2]);
+                Query zapytanie = db.Collection("Słownik").WhereEqualTo("Wyraz", słowo[słowo.Count - 2].ToString());
+                QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+
+                if (dane.Documents.Count > 0)
+                {
+                    Query zapytanie2 = db.Collection("Słownik").Document(dane.Documents.First().Id).Collection("Podpowiedzi").OrderByDescending("Popularność");
+                    QuerySnapshot dane2 = await zapytanie2.GetSnapshotAsync();
+
+                    Console.WriteLine("Znalazłem podpowiedź do słowa: "+dane.Documents.First().Id);
+                    return dane2;
+                }
+                else
+                {
+                    Console.WriteLine("Nie mogę znaleźć podpowiedzi do tego słowa");
+                }
             }
-            return Sugestie;
+            else
+            {
+                Console.WriteLine("Pobieranie podpowiedzi na rozpoczęcie zdania");
+                Query zapytanie = db.Collection("Słownik").OrderByDescending("Popularność");
+                QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+
+                return dane;
+            }
+            return null;
         }
     }
 }
