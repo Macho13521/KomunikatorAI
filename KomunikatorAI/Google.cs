@@ -358,6 +358,7 @@ namespace KomunikatorAI
             string[] słowa = wiadomość.Split(' ', '.', ',', '?', '!', '"', '*');
             List<string> słowo = new List<string>();
 
+
             for (int x = 0; x < słowa.Length; x++)
             {
                 if (słowa[x] != "" && słowa[x] != " " && słowa[x] != "." && słowa[x] != "," && słowa[x] != "!" && słowa[x] != "?")
@@ -366,20 +367,30 @@ namespace KomunikatorAI
                 }
             }
 
+            int sztuki = słowo.Count;
+
+            if (wiadomość.Last().ToString() == " ")
+            {
+                sztuki++;
+                słowo.Add("");
+                Console.WriteLine("ostatnia jest spacja");
+            }
+
+
             if (słowo.Count > 1)
             {
-                Console.WriteLine("Pobieranie podpowiedzi do słowa: "+ słowo[słowo.Count - 2]);
-                Query zapytanie = db.Collection("Słownik").WhereEqualTo("Wyraz", słowo[słowo.Count - 2].ToString());
+                //Console.WriteLine("Pobieranie podpowiedzi do słowa: "+ słowo[słowo.Count - 2]);
+                Query zapytanie = db.Collection("Słownik").WhereEqualTo("Wyraz", słowo[sztuki - 2].ToString());
                 QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
 
                 if (dane.Documents.Count > 0)
                 {
                     try
                     {
-                        Query zapytanie2 = db.Collection("Słownik").Document(dane.Documents.First().Id).Collection("Podpowiedzi").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString() + '\uf8ff');
+                        Query zapytanie2 = db.Collection("Słownik").Document(dane.Documents.First().Id).Collection("Podpowiedzi").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString() + '\uf8ff');
                         QuerySnapshot dane2 = await zapytanie2.OrderByDescending("Popularność").GetSnapshotAsync();
 
-                        Console.WriteLine("Znalazłem podpowiedź do słowa: " + dane.Documents.First().Id);
+                        //Console.WriteLine("Znalazłem podpowiedź do słowa: " + dane.Documents.First().Id);
                         return dane2;
                     }
                     catch (Exception ex) { Console.WriteLine(ex.ToString()); }
@@ -387,16 +398,16 @@ namespace KomunikatorAI
                 }
                 else
                 {
-                    Console.WriteLine("Nie mogę znaleźć podpowiedzi do tego słowa");
+                    //Console.WriteLine("Nie mogę znaleźć podpowiedzi do tego słowa");
                 }
             }
             else
             {
-                Console.WriteLine("Pobieranie podpowiedzi na rozpoczęcie zdania"+ słowo[słowo.Count - 1].ToString());
+                //Console.WriteLine("Pobieranie podpowiedzi na rozpoczęcie zdania"+ słowo[słowo.Count - 1].ToString());
 
                 try
                 {
-                    Query zapytanie = db.Collection("Słownik").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString()+'\uf8ff');
+                    Query zapytanie = db.Collection("Słownik").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString()+'\uf8ff');
                     QuerySnapshot dane = await zapytanie.OrderByDescending("Popularność").GetSnapshotAsync();
 
                     return dane;
