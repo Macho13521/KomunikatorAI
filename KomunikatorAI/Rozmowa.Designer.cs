@@ -106,6 +106,7 @@
             this.sugestie.Name = "sugestie";
             this.sugestie.Size = new System.Drawing.Size(156, 80);
             this.sugestie.TabIndex = 9;
+            this.sugestie.SelectedIndexChanged += new System.EventHandler(this.sugestie_SelectedIndexChanged);
             // 
             // Rozmowa
             // 

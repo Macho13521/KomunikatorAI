@@ -111,5 +111,24 @@ namespace KomunikatorAI
             }
 
         }
+
+        private void sugestie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] słowa = nowawiadomosc.Text.Split(' ');
+            string nowezdanie="";
+
+            for (int x=0; x<słowa.Length; x++)
+            {
+                if (x==słowa.Length-1)
+                {
+                    nowezdanie += sugestie.SelectedItem.ToString()+" ";
+                }
+                else
+                {
+                    nowezdanie+=słowa[x].ToString()+" ";    
+                }
+            }
+            nowawiadomosc.Text = nowezdanie;
+        }
     }
 }
