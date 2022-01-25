@@ -92,7 +92,7 @@ namespace KomunikatorAI
 
             QuerySnapshot dane = await Google.SugestiaAsync(nowawiadomosc.Text);
 
-            if (dane.Count>0)
+            if (dane!=null)
             {
                 foreach (DocumentSnapshot documentSnapshot in dane.Documents)
                 {
