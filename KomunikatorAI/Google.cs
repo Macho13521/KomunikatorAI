@@ -374,11 +374,16 @@ namespace KomunikatorAI
 
                 if (dane.Documents.Count > 0)
                 {
-                    Query zapytanie2 = db.Collection("Słownik").Document(dane.Documents.First().Id).Collection("Podpowiedzi").OrderByDescending("Popularność");
-                    QuerySnapshot dane2 = await zapytanie2.GetSnapshotAsync();
+                    try
+                    {
+                        Query zapytanie2 = db.Collection("Słownik").Document(dane.Documents.First().Id).Collection("Podpowiedzi").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString() + '\uf8ff');
+                        QuerySnapshot dane2 = await zapytanie2.OrderByDescending("Popularność").GetSnapshotAsync();
 
-                    Console.WriteLine("Znalazłem podpowiedź do słowa: "+dane.Documents.First().Id);
-                    return dane2;
+                        Console.WriteLine("Znalazłem podpowiedź do słowa: " + dane.Documents.First().Id);
+                        return dane2;
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                    
                 }
                 else
                 {
@@ -387,11 +392,17 @@ namespace KomunikatorAI
             }
             else
             {
-                Console.WriteLine("Pobieranie podpowiedzi na rozpoczęcie zdania");
-                Query zapytanie = db.Collection("Słownik").OrderByDescending("Popularność");
-                QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
+                Console.WriteLine("Pobieranie podpowiedzi na rozpoczęcie zdania"+ słowo[słowo.Count - 1].ToString());
 
-                return dane;
+                try
+                {
+                    Query zapytanie = db.Collection("Słownik").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[słowo.Count - 1].ToString()+'\uf8ff');
+                    QuerySnapshot dane = await zapytanie.OrderByDescending("Popularność").GetSnapshotAsync();
+
+                    return dane;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                
             }
             return null;
         }

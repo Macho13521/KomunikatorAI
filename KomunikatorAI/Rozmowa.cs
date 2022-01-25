@@ -83,7 +83,7 @@ namespace KomunikatorAI
 
         private void nowawiadomosc_TextChanged(object sender, EventArgs e)
         {
-            //Podpowiedzi();
+            PodpowiedziAsync();
         }
 
         private async Task PodpowiedziAsync()
