@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Google.Cloud.Firestore;
+using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,11 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KomunikatorAI.szablony;
 
 namespace KomunikatorAI
 {
     public partial class Logowanie : Form
     {
+        public static User użytkownik;
+
         public Logowanie()
         {
             InitializeComponent();
@@ -38,23 +42,34 @@ namespace KomunikatorAI
 
         private async Task AutoryzacjaAsync()
         {
-            string IDKonta = await Google.Logowanie(wpisanylogin.Text, wpisanehaslo.Text);
-            if (IDKonta.Length>10)
+            QuerySnapshot dokumenty = await Google.Logowanie(wpisanylogin.Text, wpisanehaslo.Text);
+            
+            if (dokumenty != null)
             {
-                new Menu(IDKonta).Show();
+                użytkownik = dokumenty.First().ConvertTo<User>();
+                new Menu().Show();
                 this.Hide();
             }
             else
             {
+                użytkownik = null;
                 MessageBox.Show("Niepoprawne dane");
             }
         }
 
+        public static bool wyłącz = true;
         public static void zamykanie(object sender, FormClosedEventArgs e)//wykrywanie sposobu wyłączenia aplikacji
         {
             if (e.CloseReason == CloseReason.UserClosing)//Jak używam this.close()
             {
-                Application.Exit();
+                if (wyłącz)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    wyłącz = true;
+                }
             }
         }
     }

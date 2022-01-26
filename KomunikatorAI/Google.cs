@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static KomunikatorAI.szablony;
+using static KomunikatorAI.Logowanie;
 
 namespace KomunikatorAI
 {
@@ -53,7 +55,7 @@ namespace KomunikatorAI
         }
 
 
-        public static async Task<string> Logowanie(string Login, string Haslo)
+        public static async Task<QuerySnapshot> Logowanie(string Login, string Haslo)
         {
             try
             {
@@ -63,28 +65,28 @@ namespace KomunikatorAI
                     .WhereEqualTo("Haslo", Haslo)
                     .WhereEqualTo("Aktywowane", true);
 
-                QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
+                QuerySnapshot dane = await kwerenda.GetSnapshotAsync();
 
-                if (zwrot.Documents.Count == 1)
+                if (dane.Documents.Count == 1)
                 {
-                    return zwrot.Documents[0].Id;
+                    return dane;
                 }
                 else
                 {
-                    return "";
+                    return null;
                 }
             }
             catch
             {
-                return "";
+                return null;
             }
         }
 
-        public static async Task<string> WyślijZaproszenieAsync(string Nadawca, string Odbiorca)
+        public static async Task<string> WyślijZaproszenieAsync(string Odbiorca)
         {
             int warunki = 0;
             Dictionary<string, object> zaproszenie = new Dictionary<string, object>() {
-                {"Nadawca", Nadawca},
+                {"Nadawca", użytkownik.Login},
                 {"Odbiorca", Odbiorca},
                 {"Zaakceptowane", false}
             };
@@ -111,7 +113,7 @@ namespace KomunikatorAI
             {
                 CollectionReference kolekt = db.Collection("Relacje");
                 Query kwerenda = kolekt
-                    .WhereEqualTo("Nadawca", Nadawca)
+                    .WhereEqualTo("Nadawca", użytkownik.ID)
                     .WhereEqualTo("Odbiorca", Odbiorca);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
@@ -131,7 +133,7 @@ namespace KomunikatorAI
                 CollectionReference kolekt = db.Collection("Relacje");
                 Query kwerenda = kolekt
                     .WhereEqualTo("Nadawca", Odbiorca)
-                    .WhereEqualTo("Odbiorca", Nadawca);
+                    .WhereEqualTo("Odbiorca", użytkownik.ID);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 
@@ -184,14 +186,14 @@ namespace KomunikatorAI
             }
         }
 
-        public static async Task<QuerySnapshot> Znajomi(string Login, bool status, bool czytoja=true)
+        public static async Task<QuerySnapshot> Znajomi(bool status, bool czytoja=true)
         {
             if (czytoja)
             {
                 try
                 {
                     Query zapytanie = db.Collection("Relacje")
-                    .WhereEqualTo("Odbiorca", Login)
+                    .WhereEqualTo("Odbiorca", użytkownik.Login)
                     .WhereEqualTo("Zaakceptowane", status);
 
                     QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
@@ -207,7 +209,7 @@ namespace KomunikatorAI
                 try
                 {
                     Query zapytanie = db.Collection("Relacje")
-                    .WhereEqualTo("Nadawca", Login)
+                    .WhereEqualTo("Nadawca", użytkownik.Login)
                     .WhereEqualTo("Zaakceptowane", status);
 
                     QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
@@ -247,14 +249,14 @@ namespace KomunikatorAI
             }
         }
 
-        public static async Task WyślijWiadomośćAsync(string IDRelacji, string Nadawca, string treść)
+        public static async Task WyślijWiadomośćAsync(string IDRelacji, string treść)
         {
             CollectionReference kolekcja = db.Collection("Relacje").Document(IDRelacji).Collection("Rozmowa");
 
 
             Dictionary<string, object> Rozmowa = new Dictionary<string, object>
             {
-                {"Nadawca", Nadawca},
+                {"Nadawca", użytkownik.Login},
                 {"Treść", treść},
                 {"Czas", Timestamp.GetCurrentTimestamp().ToProto()}
             };

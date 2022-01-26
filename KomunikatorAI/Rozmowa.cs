@@ -6,28 +6,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static KomunikatorAI.Menu;
+using static KomunikatorAI.Logowanie;
 
 namespace KomunikatorAI
 {
     public partial class Rozmowa : Form
     {
         string IDRelacji;
-        string UserLogin;
         string odbiorca;
 
         public static FirestoreChangeListener nasłuchiwacz;
 
         bool OknoAktywne = true;
 
-        public Rozmowa(string ID, string user, string rozmówca)
+        public Rozmowa(string ID, string rozmówca)
         {
             InitializeComponent();
             IDRelacji = ID;
-            UserLogin = user;
             odbiorca = rozmówca;
 
             this.Activated += ZyskanieUwagi;
             this.Deactivate += StracenieUwagi;
+            this.FormClosed += new FormClosedEventHandler(zamykanie);
         }
 
         private void StracenieUwagi(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace KomunikatorAI
 
         private async void WysyłanieWiadomości()
         {
-            await Google.WyślijWiadomośćAsync(IDRelacji, UserLogin, nowawiadomosc.Text);
+            await Google.WyślijWiadomośćAsync(IDRelacji, nowawiadomosc.Text);
             if (użytkownik.Nauczyciel)
             {
                 Google.AnalizaJęzykaAsync(nowawiadomosc.Text);
@@ -76,7 +76,7 @@ namespace KomunikatorAI
                 ListViewItem linijka = new ListViewItem("Czat");
                 Dictionary<string, object> wiadomość = dokument.ToDictionary();
 
-                if (wiadomość["Nadawca"].ToString() == UserLogin)
+                if (wiadomość["Nadawca"].ToString() == użytkownik.Login)
                 {
                     linijka.Text = "";
                     linijka.SubItems.Add(wiadomość["Treść"].ToString());
@@ -104,7 +104,7 @@ namespace KomunikatorAI
                 PobierzRozmowęAsync();
                 QuerySnapshot otrzymanawiadomość = snapshot.Query.OrderByDescending("Czas").Limit(1).GetSnapshotAsync().Result;
                 Console.WriteLine("Ilość nowych: "+otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString());
-                if (otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString()!=UserLogin && !OknoAktywne)
+                if (otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString()!=użytkownik.Login && !OknoAktywne)
                 {
                     new ToastContentBuilder().AddText("Wiadomość od: "+otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString()).AddText(otrzymanawiadomość.First().GetValue<string>("Treść").ToString()).Show();
                 }
@@ -157,6 +157,11 @@ namespace KomunikatorAI
             nowawiadomosc.Text = nowezdanie;
         }
 
-
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            new Menu().Show();
+            wyłącz = false;
+            this.Close();   
+        }
     }
 }

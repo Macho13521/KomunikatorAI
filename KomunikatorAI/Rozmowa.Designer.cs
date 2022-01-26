@@ -1,4 +1,6 @@
-﻿namespace KomunikatorAI
+﻿using System;
+
+namespace KomunikatorAI
 {
     partial class Rozmowa
     {
@@ -35,13 +37,14 @@
             this.Online = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lokalnie = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sugestie = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // info_rozmowa
             // 
             this.info_rozmowa.AutoSize = true;
             this.info_rozmowa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.info_rozmowa.Location = new System.Drawing.Point(248, 9);
+            this.info_rozmowa.Location = new System.Drawing.Point(258, 4);
             this.info_rozmowa.Name = "info_rozmowa";
             this.info_rozmowa.Size = new System.Drawing.Size(57, 20);
             this.info_rozmowa.TabIndex = 0;
@@ -49,7 +52,7 @@
             // 
             // nowawiadomosc
             // 
-            this.nowawiadomosc.Location = new System.Drawing.Point(106, 378);
+            this.nowawiadomosc.Location = new System.Drawing.Point(116, 373);
             this.nowawiadomosc.Name = "nowawiadomosc";
             this.nowawiadomosc.Size = new System.Drawing.Size(470, 50);
             this.nowawiadomosc.TabIndex = 1;
@@ -58,7 +61,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(582, 378);
+            this.button1.Location = new System.Drawing.Point(592, 373);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 50);
             this.button1.TabIndex = 2;
@@ -73,7 +76,7 @@
             this.Lokalnie});
             this.oknorozmowy.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.oknorozmowy.HideSelection = false;
-            this.oknorozmowy.Location = new System.Drawing.Point(106, 34);
+            this.oknorozmowy.Location = new System.Drawing.Point(116, 29);
             this.oknorozmowy.MultiSelect = false;
             this.oknorozmowy.Name = "oknorozmowy";
             this.oknorozmowy.Scrollable = false;
@@ -102,17 +105,28 @@
             this.sugestie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.sugestie.FormattingEnabled = true;
             this.sugestie.ItemHeight = 20;
-            this.sugestie.Location = new System.Drawing.Point(317, 292);
+            this.sugestie.Location = new System.Drawing.Point(327, 287);
             this.sugestie.Name = "sugestie";
             this.sugestie.Size = new System.Drawing.Size(156, 80);
             this.sugestie.TabIndex = 9;
             this.sugestie.SelectedIndexChanged += new System.EventHandler(this.sugestie_SelectedIndexChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(23, 29);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Powrót";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Rozmowa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.sugestie);
             this.Controls.Add(this.oknorozmowy);
             this.Controls.Add(this.button1);
@@ -126,6 +140,11 @@
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private System.Windows.Forms.Label info_rozmowa;
@@ -135,5 +154,6 @@
         private System.Windows.Forms.ColumnHeader Online;
         private System.Windows.Forms.ColumnHeader Lokalnie;
         private System.Windows.Forms.ListBox sugestie;
+        private System.Windows.Forms.Button button2;
     }
 }

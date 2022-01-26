@@ -12,6 +12,8 @@ namespace KomunikatorAI
         [FirestoreData]
         public class User
         {
+            [FirestoreDocumentId]
+            public string ID { get; set; }
             [FirestoreProperty]
             public string Login { get; set; }
             [FirestoreProperty]

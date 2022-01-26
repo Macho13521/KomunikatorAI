@@ -10,24 +10,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static KomunikatorAI.szablony;
 using System.Threading;
+using static KomunikatorAI.Logowanie;
 
 namespace KomunikatorAI
 {
     public partial class Menu : Form
     {
-        public string IDKonta;
-
-        public static User użytkownik;
-
         List<string> IDZaproszeń = new List<string>();
         List<string> IDZnajomych = new List<string>();
 
 
-        public Menu(string identyfikator)
+        public Menu()
         {
             InitializeComponent();
             this.FormClosed += new FormClosedEventHandler(Logowanie.zamykanie);
-            IDKonta = identyfikator;
         }
 
         private void Menu_Load(object sender, EventArgs e)
@@ -43,17 +39,8 @@ namespace KomunikatorAI
 
         private async Task PobieranieUżytkownikaAsync()
         {
-            DocumentSnapshot dane = await Google.PobierzRekord("Konta", IDKonta);
-            if (dane.Exists)
-            {
-                użytkownik = dane.ConvertTo<User>();
-                przywitanie.Text = "Witaj "+użytkownik.Login;
-                Odświeżenie();
-            }
-            else
-            {
-                MessageBox.Show("Nie ma użytkownika o takim ID "+IDKonta);
-            }
+            przywitanie.Text = "Witaj "+użytkownik.Login;
+            Odświeżenie();
         }
 
 
@@ -61,7 +48,7 @@ namespace KomunikatorAI
         {
             if (użytkownik.Login!= nowyznajomy.Text)
             {
-                string komunikat = await Google.WyślijZaproszenieAsync(użytkownik.Login, nowyznajomy.Text);
+                string komunikat = await Google.WyślijZaproszenieAsync(nowyznajomy.Text);
                 MessageBox.Show(komunikat);
             }
             else
@@ -76,7 +63,7 @@ namespace KomunikatorAI
             zaproszeniaznajomych.Items.Clear();
             IDZaproszeń.Clear();
 
-            QuerySnapshot dane = await Google.Znajomi(użytkownik.Login, false);
+            QuerySnapshot dane = await Google.Znajomi(false);
 
             foreach (DocumentSnapshot documentSnapshot in dane.Documents)
             {
@@ -146,7 +133,7 @@ namespace KomunikatorAI
             listaznajomych.Items.Clear();
             IDZnajomych.Clear();
 
-            QuerySnapshot dane = await Google.Znajomi(użytkownik.Login, true);
+            QuerySnapshot dane = await Google.Znajomi(true);
 
             foreach (DocumentSnapshot documentSnapshot in dane.Documents)
             {
@@ -156,7 +143,7 @@ namespace KomunikatorAI
                 listaznajomych.Items.Add(zaproszenia["Nadawca"]);
             }
 
-            dane = await Google.Znajomi(użytkownik.Login, true, false);
+            dane = await Google.Znajomi(true, false);
 
             foreach (DocumentSnapshot documentSnapshot in dane.Documents)
             {
@@ -198,12 +185,22 @@ namespace KomunikatorAI
             {
                 string IDRelacji = IDZnajomych[listaznajomych.SelectedIndex];
 
-                new Rozmowa(IDRelacji, użytkownik.Login, listaznajomych.SelectedItem.ToString()).Show();
+                new Rozmowa(IDRelacji, listaznajomych.SelectedItem.ToString()).Show();
+                wyłącz = false;
+                this.Close();
             }
             else
             {
                 MessageBox.Show("Nie wybrałeś żadnego znajomego");
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            użytkownik = null;
+            new Logowanie().Show();
+            wyłącz = false;
+            this.Close();
         }
     }
 }
