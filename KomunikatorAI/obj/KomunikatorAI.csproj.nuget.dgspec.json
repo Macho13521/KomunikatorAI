@@ -1,0 +1,182 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\macho\\source\\repos\\KomunikatorAI\\KomunikatorAI\\KomunikatorAI.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\macho\\source\\repos\\KomunikatorAI\\KomunikatorAI\\KomunikatorAI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\macho\\source\\repos\\KomunikatorAI\\KomunikatorAI\\KomunikatorAI.csproj",
+        "projectName": "KomunikatorAI",
+        "projectPath": "C:\\Users\\macho\\source\\repos\\KomunikatorAI\\KomunikatorAI\\KomunikatorAI.csproj",
+        "packagesPath": "C:\\Users\\macho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\macho\\source\\repos\\KomunikatorAI\\KomunikatorAI\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\macho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Google.Api.CommonProtos": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Google.Api.Gax": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "Google.Api.Gax.Grpc": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "Google.Api.Gax.Grpc.GrpcCore": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "Google.Apis": {
+              "target": "Package",
+              "version": "[1.48.0, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.48.0, )"
+            },
+            "Google.Apis.Core": {
+              "target": "Package",
+              "version": "[1.48.0, )"
+            },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "Google.Cloud.Firestore.V1": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Google.LongRunning": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.15.8, )"
+            },
+            "Grpc.Auth": {
+              "target": "Package",
+              "version": "[2.36.4, )"
+            },
+            "Grpc.Core": {
+              "target": "Package",
+              "version": "[2.36.4, )"
+            },
+            "Grpc.Core.Api": {
+              "target": "Package",
+              "version": "[2.36.4, )"
+            },
+            "Microsoft.Bcl.AsyncInterfaces": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies.net472": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[7.1.2, )"
+            },
+            "Microsoft.Windows.SDK.Contracts": {
+              "target": "Package",
+              "version": "[10.0.19041.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Buffers": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.Collections.Immutable": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "System.Linq.Async": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "System.Memory": {
+              "target": "Package",
+              "version": "[4.5.3, )"
+            },
+            "System.Numerics.Vectors": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.Runtime.CompilerServices.Unsafe": {
+              "target": "Package",
+              "version": "[4.5.2, )"
+            },
+            "System.Runtime.WindowsRuntime": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Runtime.WindowsRuntime.UI.Xaml": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Threading.Tasks.Extensions": {
+              "target": "Package",
+              "version": "[4.5.2, )"
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            }
+          },
+          "imports": [
+            "uap10.0.19041"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

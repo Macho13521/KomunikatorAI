@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,6 +34,7 @@ namespace KomunikatorAI
         {
             Google.Connect();
         }
+
 
         private async Task AutoryzacjaAsync()
         {

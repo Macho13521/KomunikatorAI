@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,28 @@ namespace KomunikatorAI
 
         public static FirestoreChangeListener nasłuchiwacz;
 
+        bool OknoAktywne = true;
+
         public Rozmowa(string ID, string user, string rozmówca)
         {
             InitializeComponent();
             IDRelacji = ID;
             UserLogin = user;
             odbiorca = rozmówca;
+
+            this.Activated += ZyskanieUwagi;
+            this.Deactivate += StracenieUwagi;
+        }
+
+        private void StracenieUwagi(object sender, EventArgs e)
+        {
+            OknoAktywne = false;
+
+        }
+
+        private void ZyskanieUwagi(object sender, EventArgs e)
+        {
+            OknoAktywne = true;
         }
 
         private void Rozmowa_Load(object sender, EventArgs e)
@@ -76,12 +93,21 @@ namespace KomunikatorAI
             }
         }
 
+
+        
+
         private void OdświeżanieCzatu()
         {
             Query warunki = Google.db.Collection("Relacje").Document(IDRelacji).Collection("Rozmowa");
             nasłuchiwacz = warunki.Listen(snapshot =>
             {
                 PobierzRozmowęAsync();
+                QuerySnapshot otrzymanawiadomość = snapshot.Query.OrderByDescending("Czas").Limit(1).GetSnapshotAsync().Result;
+                Console.WriteLine("Ilość nowych: "+otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString());
+                if (otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString()!=UserLogin && !OknoAktywne)
+                {
+                    new ToastContentBuilder().AddText("Wiadomość od: "+otrzymanawiadomość.First().GetValue<string>("Nadawca").ToString()).AddText(otrzymanawiadomość.First().GetValue<string>("Treść").ToString()).Show();
+                }
             });
         }
 
@@ -130,5 +156,7 @@ namespace KomunikatorAI
             }
             nowawiadomosc.Text = nowezdanie;
         }
+
+
     }
 }

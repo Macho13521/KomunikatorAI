@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KomunikatorAI.exe" size="51168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KomunikatorAI.exe" size="52192">
       <assemblyIdentity name="KomunikatorAI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oALxAnMcb/ckSMBE5L1dQPX3mijW6DxZJ+zKK3W+6rc=</dsig:DigestValue>
+        <dsig:DigestValue>C+jaNzfUTp4ebGz9OvKG4efNYE0e3sjH9RNzOUHBSng=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -254,6 +254,18 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>1Q1HucXegtVjr/IIpgDaVlZNBVz+2XQhaF5UdSMNPnA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Toolkit.Uwp.Notifications.dll" size="143568">
+      <assemblyIdentity name="Microsoft.Toolkit.Uwp.Notifications" version="7.1.0.0" publicKeyToken="4AFF67A105548EE2" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Ue69so8EL2Fp48cc7BbT+pVjTEKEog7R1OTRgt5fS+w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -353,6 +365,18 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.ValueTuple.dll" size="25232">
+      <assemblyIdentity name="System.ValueTuple" version="4.0.3.0" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>6QXRAlhbIsbfBPIZr1y9v6e8Fll56XiLYt9tzBZeEPQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
   <file name="grpc_csharp_ext.x64.dll" size="9538664">
     <hash>
       <dsig:Transforms>
@@ -371,13 +395,13 @@
       <dsig:DigestValue>mrKzQjTmeNkCWgB4xl8PZKIEV25dGmSaf5iVEBtlzdk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="KomunikatorAI.exe.config" size="1766">
+  <file name="KomunikatorAI.exe.config" size="2330">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>YouLBeL0z82tkXdpavsCZ06Zzr9OWVcmC/TDPkxQd3g=</dsig:DigestValue>
+      <dsig:DigestValue>GVL4nyIuRaHEFossd+3DBLJHU31f15E7zmujjOUjK4g=</dsig:DigestValue>
     </hash>
   </file>
   <file name="libgrpc_csharp_ext.x64.dylib" size="8371628">
