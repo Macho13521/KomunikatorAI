@@ -15,7 +15,7 @@ namespace KomunikatorAI
         string IDRelacji;
         string odbiorca;
 
-        public static FirestoreChangeListener nasłuchiwacz;
+        private FirestoreChangeListener nasłuchiwacz;
 
         bool OknoAktywne = true;
 
@@ -160,7 +160,9 @@ namespace KomunikatorAI
         private void button2_Click_1(object sender, EventArgs e)
         {
             new Menu().Show();
+
             wyłącz = false;
+            nasłuchiwacz.StopAsync();
             this.Close();   
         }
     }

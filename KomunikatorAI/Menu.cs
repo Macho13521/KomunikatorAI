@@ -1,16 +1,12 @@
 ﻿using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static KomunikatorAI.szablony;
 using System.Threading;
 using static KomunikatorAI.Logowanie;
+using Microsoft.Toolkit.Uwp.Notifications;
+using System.Linq;
 
 namespace KomunikatorAI
 {
@@ -19,10 +15,18 @@ namespace KomunikatorAI
         List<string> IDZaproszeń = new List<string>();
         List<string> IDZnajomych = new List<string>();
 
+        public FirestoreChangeListener nasłuchiwacz;
+
+        private bool OknoAktywne=true;
+
+        private bool OczekująceOdświeżenie = false;
 
         public Menu()
         {
             InitializeComponent();
+
+            this.Activated += ZyskanieUwagi;
+            this.Deactivate += StracenieUwagi;
             this.FormClosed += new FormClosedEventHandler(Logowanie.zamykanie);
         }
 
@@ -31,6 +35,22 @@ namespace KomunikatorAI
             PobieranieUżytkownikaAsync();
         }
 
+        private void StracenieUwagi(object sender, EventArgs e)
+        {
+            OknoAktywne = false;
+
+        }
+
+        private void ZyskanieUwagi(object sender, EventArgs e)
+        {
+            OknoAktywne = true;
+            if (OczekująceOdświeżenie)
+            {
+                WstępneZaproszeniaAsync();
+                ListaZnajomychAsync();
+                OczekująceOdświeżenie = false;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,7 +60,11 @@ namespace KomunikatorAI
         private async Task PobieranieUżytkownikaAsync()
         {
             przywitanie.Text = "Witaj "+użytkownik.Login;
-            Odświeżenie();
+            OdświeżanieZaproszeń();
+            OdświeżanieZnajomych();
+
+            WstępneZaproszeniaAsync();
+            ListaZnajomychAsync();
         }
 
 
@@ -56,6 +80,46 @@ namespace KomunikatorAI
                 MessageBox.Show("Nie możesz dodać sam siebie");
             }
             
+        }
+
+        private void OdświeżanieZaproszeń()
+        {
+            Query warunki = Google.db.Collection("Relacje")
+                    .WhereEqualTo("Odbiorca", użytkownik.Login)
+                    .WhereEqualTo("Zaakceptowane", false);
+            nasłuchiwacz = warunki.Listen(snapshot =>
+            {
+                QuerySnapshot otrzymanezaproszenie = snapshot.Query.Limit(1).GetSnapshotAsync().Result;
+                if (!OknoAktywne)
+                {
+                    new ToastContentBuilder().AddText("Otrzymane zaproszenie do znajomych od: " + otrzymanezaproszenie.First().GetValue<string>("Nadawca").ToString()).Show();
+                    OczekująceOdświeżenie = true;
+                }
+                else
+                {
+                    WstępneZaproszeniaAsync();
+                }
+            });
+        }
+
+        private void OdświeżanieZnajomych()
+        {
+            Query warunki = Google.db.Collection("Relacje")
+                    .WhereEqualTo("Nadawca", użytkownik.Login)
+                    .WhereEqualTo("Zaakceptowane", true);
+            nasłuchiwacz = warunki.Listen(snapshot =>
+            {
+                QuerySnapshot nowyznajomy = snapshot.Query.Limit(1).GetSnapshotAsync().Result;
+                if (!OknoAktywne)
+                {
+                    new ToastContentBuilder().AddText(nowyznajomy.First().GetValue<string>("Nadawca").ToString()+" jest twoim znajomym").Show();
+                    OczekująceOdświeżenie = true;
+                }
+                else
+                {
+                    ListaZnajomychAsync();
+                }
+            });
         }
 
         private async Task WstępneZaproszeniaAsync()
@@ -88,7 +152,8 @@ namespace KomunikatorAI
                 };
 
                 await Google.AktualizacjaRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex], zaproszenie);
-                Odświeżenie();
+                WstępneZaproszeniaAsync();
+                ListaZnajomychAsync();
             }
             else
             {
@@ -106,26 +171,13 @@ namespace KomunikatorAI
             if (zaproszeniaznajomych.SelectedIndex >= 0)
             {
                 Google.UsuwanieRekordu("Relacje", IDZaproszeń[zaproszeniaznajomych.SelectedIndex]);
-
-                Thread.Sleep(1000);
-
-                Odświeżenie();
+                Thread.Sleep(500);
+                WstępneZaproszeniaAsync();
             }
             else
             {
                 MessageBox.Show("Nie wybrałeś żadnego zaproszenia");
             }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Odświeżenie();
-        }
-
-        private void Odświeżenie()
-        {
-            WstępneZaproszeniaAsync();
-            ListaZnajomychAsync();
         }
 
         private async Task ListaZnajomychAsync()
@@ -159,10 +211,8 @@ namespace KomunikatorAI
             if (listaznajomych.SelectedIndex >=0)
             {
                 Google.UsuwanieRekordu("Relacje", IDZnajomych[listaznajomych.SelectedIndex]);
-
-                Thread.Sleep(1000);
-
-                Odświeżenie();
+                Thread.Sleep(500);
+                ListaZnajomychAsync();
             }
             else
             {
@@ -172,10 +222,6 @@ namespace KomunikatorAI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(Rozmowa.nasłuchiwacz!=null)
-            {
-                Rozmowa.nasłuchiwacz.StopAsync();
-            }
             RozmowaAsync();
         }
 
@@ -187,6 +233,8 @@ namespace KomunikatorAI
 
                 new Rozmowa(IDRelacji, listaznajomych.SelectedItem.ToString()).Show();
                 wyłącz = false;
+                nasłuchiwacz.StopAsync();
+
                 this.Close();
             }
             else

@@ -50,7 +50,6 @@ C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Release\System.Numer
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Release\System.Threading.Tasks.Extensions.dll
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\bin\Release\System.ValueTuple.dll
-C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Release\KomunikatorAI.csproj.AssemblyReference.cache
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Release\KomunikatorAI.csproj.SuggestedBindingRedirects.cache
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Release\KomunikatorAI.exe.config
 C:\Users\macho\source\repos\KomunikatorAI\KomunikatorAI\obj\Release\KomunikatorAI.Logowanie.resources
