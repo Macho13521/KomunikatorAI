@@ -112,7 +112,7 @@ namespace KomunikatorAI
                 QuerySnapshot nowyznajomy = snapshot.Query.Limit(1).GetSnapshotAsync().Result;
                 if (!OknoAktywne)
                 {
-                    new ToastContentBuilder().AddText(nowyznajomy.First().GetValue<string>("Nadawca").ToString()+" jest twoim znajomym").Show();
+                    new ToastContentBuilder().AddText(nowyznajomy.First().GetValue<string>("Odbiorca").ToString()+" jest twoim znajomym").Show();
                     OczekująceOdświeżenie = true;
                 }
                 else

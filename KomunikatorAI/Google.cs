@@ -113,7 +113,7 @@ namespace KomunikatorAI
             {
                 CollectionReference kolekt = db.Collection("Relacje");
                 Query kwerenda = kolekt
-                    .WhereEqualTo("Nadawca", użytkownik.ID)
+                    .WhereEqualTo("Nadawca", użytkownik.Login)
                     .WhereEqualTo("Odbiorca", Odbiorca);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
@@ -133,7 +133,7 @@ namespace KomunikatorAI
                 CollectionReference kolekt = db.Collection("Relacje");
                 Query kwerenda = kolekt
                     .WhereEqualTo("Nadawca", Odbiorca)
-                    .WhereEqualTo("Odbiorca", użytkownik.ID);
+                    .WhereEqualTo("Odbiorca", użytkownik.Login);
 
                 QuerySnapshot zwrot = await kwerenda.GetSnapshotAsync();
 
@@ -164,25 +164,6 @@ namespace KomunikatorAI
             else
             {
                 return "Nie ma takiego Użytkownika lub już zostało wysłane zaproszenie";
-            }
-        }
-
-        internal static void AktualizacjaRekordu(string v1, string v2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static async Task<DocumentSnapshot> PobierzRekord(string Kolekcja, string ID)
-        {
-            try
-            {
-                DocumentReference warunki = db.Collection(Kolekcja).Document(ID);
-                DocumentSnapshot zapytanie = await warunki.GetSnapshotAsync();
-                return zapytanie;
-            }
-            catch
-            {
-                return null;
             }
         }
 
