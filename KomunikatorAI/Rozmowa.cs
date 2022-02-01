@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static KomunikatorAI.Menu;
 using static KomunikatorAI.Logowanie;
+using static KomunikatorAI.szablony;
 
 namespace KomunikatorAI
 {
@@ -119,6 +120,8 @@ namespace KomunikatorAI
         private async Task PodpowiedziAsync()
         {
             sugestie.Items.Clear(); 
+            List<propozycja> dokumenty = new List<propozycja>();
+
 
             QuerySnapshot dane = await Google.SugestiaAsync(nowawiadomosc.Text);
 
@@ -126,9 +129,8 @@ namespace KomunikatorAI
             {
                 foreach (DocumentSnapshot documentSnapshot in dane.Documents)
                 {
-                    Dictionary<string, object> sugestia = documentSnapshot.ToDictionary();
-
-                    sugestie.Items.Add(sugestia["Wyraz"].ToString());
+                    propozycja słowo = documentSnapshot.ConvertTo<propozycja>();
+                    dokumenty.Add(słowo);
                 }
             }
             else
@@ -136,6 +138,10 @@ namespace KomunikatorAI
                 Console.WriteLine("Nie ma podpowiedzi do tego słowa");
             }
 
+            dokumenty = dokumenty.OrderByDescending(x => x.Popularność).ToList();
+
+
+            dokumenty.ForEach(x => sugestie.Items.Add(x.Wyraz));
         }
 
         private void sugestie_SelectedIndexChanged(object sender, EventArgs e)

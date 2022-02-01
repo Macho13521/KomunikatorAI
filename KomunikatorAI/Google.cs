@@ -375,7 +375,7 @@ namespace KomunikatorAI
                     try
                     {
                         Query zapytanie2 = db.Collection("Słownik").Document(dane.Documents.First().Id).Collection("Podpowiedzi").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString() + '\uf8ff');
-                        QuerySnapshot dane2 = await zapytanie2.OrderByDescending("Popularność").GetSnapshotAsync();
+                        QuerySnapshot dane2 = await zapytanie2.GetSnapshotAsync();
 
                         //Console.WriteLine("Znalazłem podpowiedź do słowa: " + dane.Documents.First().Id);
                         return dane2;
@@ -395,7 +395,7 @@ namespace KomunikatorAI
                 try
                 {
                     Query zapytanie = db.Collection("Słownik").OrderBy("Wyraz").WhereGreaterThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString()).WhereLessThanOrEqualTo("Wyraz", słowo[sztuki - 1].ToString()+'\uf8ff');
-                    QuerySnapshot dane = await zapytanie.OrderByDescending("Popularność").GetSnapshotAsync();
+                    QuerySnapshot dane = await zapytanie.GetSnapshotAsync();
 
                     return dane;
                 }

@@ -21,5 +21,16 @@ namespace KomunikatorAI
             [FirestoreProperty]
             public bool Nauczyciel { get; set; }
         }
+
+        [FirestoreData]
+        public class propozycja
+        {
+            [FirestoreDocumentId]
+            public string ID { get; set; }
+            [FirestoreProperty]
+            public string Wyraz { get; set; }
+            [FirestoreProperty]
+            public int Popularność { get; set; }
+        }
     }
 }
