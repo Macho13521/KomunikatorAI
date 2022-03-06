@@ -30,6 +30,7 @@ namespace KomunikatorAI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Rozmowa));
             this.info_rozmowa = new System.Windows.Forms.Label();
             this.nowawiadomosc = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,9 +47,9 @@ namespace KomunikatorAI
             this.info_rozmowa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.info_rozmowa.Location = new System.Drawing.Point(258, 4);
             this.info_rozmowa.Name = "info_rozmowa";
-            this.info_rozmowa.Size = new System.Drawing.Size(57, 20);
+            this.info_rozmowa.Size = new System.Drawing.Size(143, 20);
             this.info_rozmowa.TabIndex = 0;
-            this.info_rozmowa.Text = "label1";
+            this.info_rozmowa.Text = "Login Rozmówcy";
             // 
             // nowawiadomosc
             // 
@@ -132,6 +133,7 @@ namespace KomunikatorAI
             this.Controls.Add(this.button1);
             this.Controls.Add(this.nowawiadomosc);
             this.Controls.Add(this.info_rozmowa);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Rozmowa";
             this.Text = "Rozmowa";
             this.Load += new System.EventHandler(this.Rozmowa_Load);

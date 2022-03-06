@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="KomunikatorAI.exe.manifest" size="23888">
+    <dependentAssembly dependencyType="install" codebase="KomunikatorAI.exe.manifest" size="23889">
       <assemblyIdentity name="KomunikatorAI.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>zfV9qqvc0whwlt+6RL91aERawX1iHlk9x8A9oMAEMq0=</dsig:DigestValue>
+        <dsig:DigestValue>QYAzsR6Qz3XNV4PLBRU4Jh6aXyJyUVeZJXeDQixpl04=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

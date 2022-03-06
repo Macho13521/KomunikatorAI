@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Logowanie));
             this.button1 = new System.Windows.Forms.Button();
             this.wpisanylogin = new System.Windows.Forms.TextBox();
             this.wpisanehaslo = new System.Windows.Forms.TextBox();
@@ -112,6 +113,7 @@
             this.Controls.Add(this.wpisanehaslo);
             this.Controls.Add(this.wpisanylogin);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Logowanie";
             this.Text = "Logowanie";
             this.Load += new System.EventHandler(this.Logowanie_Load);

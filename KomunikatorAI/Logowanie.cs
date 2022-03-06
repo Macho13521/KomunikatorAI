@@ -16,6 +16,7 @@ namespace KomunikatorAI
     public partial class Logowanie : Form
     {
         public static User użytkownik;
+        public static bool wyłącz = true;
 
         public Logowanie()
         {
@@ -57,10 +58,9 @@ namespace KomunikatorAI
             }
         }
 
-        public static bool wyłącz = true;
-        public static void zamykanie(object sender, FormClosedEventArgs e)//wykrywanie sposobu wyłączenia aplikacji
+        public static void zamykanie(object sender, FormClosedEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)//Jak używam this.close()
+            if (e.CloseReason == CloseReason.UserClosing)
             {
                 if (wyłącz)
                 {
